@@ -1,0 +1,15 @@
+<header>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>App</span>
+      <button mat-icon-button aria-label="User" *ngIf="false; else default">
+        <mat-icon fontIcon="face"></mat-icon>
+      </button>
+      <ng-template #default>
+        <a mat-flat-button color="primary" routerLink="/auth/login">
+          <mat-icon fontIcon="lock_open"></mat-icon>Login
+        </a>
+      </ng-template>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>
