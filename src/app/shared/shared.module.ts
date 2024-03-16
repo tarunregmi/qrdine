@@ -10,6 +10,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { HomeComponent } from './components/home/home.component';
 
+import { LoginService } from './services/login.service';
+
 @NgModule({
   declarations: [ToolbarComponent, NotfoundComponent, HomeComponent],
   imports: [
@@ -20,5 +22,8 @@ import { HomeComponent } from './components/home/home.component';
     MatToolbarModule,
   ],
   exports: [ToolbarComponent, NotfoundComponent, HomeComponent],
+  providers: [
+    LoginService,
+  ]
 })
 export class SharedModule {}

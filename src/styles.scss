@@ -53,6 +53,23 @@ body,
   justify-content: center;
 }
 
+.hr {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  margin: 20px 0;
+  span {
+    padding: 0 15px;
+  }
+}
+
+.hr::before,
+.hr::after {
+  content: '';
+  width: 50%;
+  height: 1px;
+  background: #d3d6db;
+}
+
 // override mdc
 .mdc-button {
   .mat-icon {

@@ -2,7 +2,7 @@
   <mat-toolbar color="primary">
     <mat-toolbar-row>
       <span>App</span>
-      <button mat-icon-button aria-label="User" *ngIf="false; else default">
+      <button mat-icon-button aria-label="User" *ngIf="login_.isLogin(); else default">
         <mat-icon fontIcon="face"></mat-icon>
       </button>
       <ng-template #default>
