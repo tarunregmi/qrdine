@@ -9,13 +9,22 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { HomeComponent } from './components/home/home.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 import { LoginService } from './services/login.service';
 import { NprPipe } from './pipes/npr.pipe';
 import { EllipsisPipe } from './pipes/ellipsis.pipe';
+import { RealtimeService } from './services/realtime.service';
 
 @NgModule({
-  declarations: [ToolbarComponent, NotfoundComponent, HomeComponent, NprPipe, EllipsisPipe],
+  declarations: [
+    ToolbarComponent,
+    NotfoundComponent,
+    HomeComponent,
+    LoaderComponent,
+    NprPipe,
+    EllipsisPipe,
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -27,11 +36,13 @@ import { EllipsisPipe } from './pipes/ellipsis.pipe';
     ToolbarComponent,
     NotfoundComponent,
     HomeComponent,
+    LoaderComponent,
     EllipsisPipe,
     NprPipe,
   ],
   providers: [
     LoginService,
+    RealtimeService,
   ]
 })
 export class SharedModule {}
