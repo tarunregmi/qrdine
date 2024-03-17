@@ -27,6 +27,7 @@ body,
 
 #main {
   padding: 0 16px; // same as mat-toolbar-row
+  padding-top: var(--mat-toolbar-standard-height); // mat-toolbar height (screen > 599px) for mall 56px
 }
 
 // utility classes
@@ -74,5 +75,15 @@ body,
 .mdc-button {
   .mat-icon {
     font-weight: inherit;
+  }
+}
+
+
+// media
+@media (max-width: 599px) {
+  // width is taken from material style
+
+  #main {
+    padding-top: var(--mat-toolbar-mobile-height);
   }
 }

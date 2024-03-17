@@ -11,9 +11,11 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { LoginService } from './services/login.service';
+import { NprPipe } from './pipes/npr.pipe';
+import { EllipsisPipe } from './pipes/ellipsis.pipe';
 
 @NgModule({
-  declarations: [ToolbarComponent, NotfoundComponent, HomeComponent],
+  declarations: [ToolbarComponent, NotfoundComponent, HomeComponent, NprPipe, EllipsisPipe],
   imports: [
     CommonModule,
     RouterModule,
@@ -21,7 +23,13 @@ import { LoginService } from './services/login.service';
     MatButtonModule,
     MatToolbarModule,
   ],
-  exports: [ToolbarComponent, NotfoundComponent, HomeComponent],
+  exports: [
+    ToolbarComponent,
+    NotfoundComponent,
+    HomeComponent,
+    EllipsisPipe,
+    NprPipe,
+  ],
   providers: [
     LoginService,
   ]

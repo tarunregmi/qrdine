@@ -1,3 +1,19 @@
+.mat-toolbar {
+  position: fixed;
+  top: 0;
+  z-index: 101;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color .5s, border-color .5s;
+}
+
+.mat-toolbar.on-scroll {
+  border-bottom: 1px solid rgb(0 0 0 / 0.12);
+  background-color: rgba(255,255,255,.7);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
 .mat-toolbar-row {
   justify-content: space-between;
 }

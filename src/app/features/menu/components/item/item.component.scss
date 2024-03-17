@@ -1,0 +1,35 @@
+.card {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+
+  img {
+    margin: 40px 0;
+    width: 260px;
+    height: 260px;
+    object-fit: cover;
+    object-position: center;
+    align-self: center;
+  }
+
+  p {
+    margin: 16px 0;
+  }
+
+  .mat-mdc-card-header {
+    align-items: center;
+    
+    .price {
+      margin-left: auto;
+    }
+  }
+
+  .mdc-button {
+    border-radius: 10px;
+    margin-top: 21px;
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto 1fr;
+  }
+}

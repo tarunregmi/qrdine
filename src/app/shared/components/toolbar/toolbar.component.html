@@ -1,5 +1,5 @@
 <header>
-  <mat-toolbar color="primary">
+  <mat-toolbar [ngClass]="{'on-scroll': isScrolled}">
     <mat-toolbar-row>
       <span>App</span>
       <button mat-icon-button aria-label="User" *ngIf="login_.isLogin(); else default">
