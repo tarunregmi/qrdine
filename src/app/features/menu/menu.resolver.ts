@@ -10,7 +10,6 @@ export const menuResolver: ResolveFn<Observable<MenuItem[]>> = () => {
   return menu_.getItems().pipe(
     catchError(() => EMPTY),
     concatMap(response => {
-      console.log(response);
       if (response) return of(response);
       else return EMPTY;
     })

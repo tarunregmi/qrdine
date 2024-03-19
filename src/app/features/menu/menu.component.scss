@@ -5,3 +5,10 @@
   grid-auto-flow: dense;
   justify-content: center;
 }
+
+.cart-icon {
+  position: fixed;
+  right: var(--pad-x);
+  bottom: var(--pad-x);
+  z-index: 10;
+}

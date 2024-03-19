@@ -8,6 +8,10 @@
   </div> -->
   
   <div class="menu-items" style="margin-top: 50px;">
-    <qd-item *ngFor="let item of items" [item]="item"></qd-item>
+    <qd-item *ngFor="let item of items" [item]="item" [cart_]="cart_"></qd-item>
   </div>
+
+  <button mat-fab color="primary" [matBadge]="cart_.cart().length" matBadgePosition="before" *ngIf="cart_.cart().length" class="cart-icon" routerLink="./cart" queryParamsHandling="preserve">
+    <mat-icon fontIcon="shopping_cart_checkout"></mat-icon>
+  </button>
 </div>

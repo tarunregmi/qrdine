@@ -1,0 +1,17 @@
+.cart-page {
+  gap: 21px;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  // grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.actions {
+  padding: 21px;
+  background: #fff;
+}
+
+@media (max-width: 752px) {
+  .cart-page {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}

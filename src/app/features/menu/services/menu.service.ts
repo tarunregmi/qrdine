@@ -30,4 +30,21 @@ export class MenuService {
       })
     );
   }
+
+  public getItem(id: string): Observable<MenuItem> {
+    return this.httpClient_.get(`${environment.baseURL}/api/collections/menu/${id}`)
+      .pipe(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        map((response: any) => {
+          return {
+            id: response.id,
+            title: response.title,
+            description: response.description,
+            veg: response.veg,
+            price: response.price,
+            thumbnail: `${environment.baseURL}/api/files/${response.collectionId}/${response.id}/${response.thumbnail}`
+          }
+        })
+      )
+  }
 }

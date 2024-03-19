@@ -1,0 +1,28 @@
+<mat-card appearance="outlined" class="card column">
+  <img mat-card-image draggable="false" [src]="item.thumbnail" [alt]="item.title" />
+  <mat-card-header>
+    <div class="title">
+      <mat-card-title>{{ item.title }}</mat-card-title>
+      <mat-card-subtitle>{{ item.veg }}</mat-card-subtitle>
+    </div>
+    <div class="price">{{ item.price| npr }}</div>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-actions class="cart-action row">
+    <div>
+      <button mat-flat-button matTooltip="Decrease Quantity" (click)="cart_.updateCart(item, -1)" [disabled]="cart_.getQuantityOf(item) < 2">
+        <mat-icon fontIcon="remove"></mat-icon>
+      </button>
+      <span class="quantity row center">{{ cart_.getQuantityOf(item) }}</span>
+      <button mat-flat-button matTooltip="Increase Quantity" (click)="cart_.updateCart(item, 1)">
+        <mat-icon fontIcon="add"></mat-icon>
+      </button>
+    </div>
+
+    <button mat-mini-fab color="none" matTooltip="Delete Item" (click)="cart_.updateCart(item)">
+      <mat-icon fontIcon="delete"></mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

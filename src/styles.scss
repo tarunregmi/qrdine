@@ -23,10 +23,12 @@ body,
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: min-content auto;
+
+  --pad-x: 16px; // same as mat-toolbar-row
 }
 
 #main {
-  padding: 0 16px; // same as mat-toolbar-row
+  padding: 0 var(--pad-x); // same as mat-toolbar-row
   padding-top: var(--mat-toolbar-standard-height); // mat-toolbar height (screen > 599px) for mall 56px
 }
 

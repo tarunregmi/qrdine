@@ -4,6 +4,7 @@ import { MenuService } from './services/menu.service';
 import { RealtimeService } from 'src/app/shared/services/realtime.service';
 import { environment } from 'src/environments/environment.development';
 import { ActivatedRoute } from '@angular/router';
+import { CartService } from 'src/app/shared/services/cart.service';
 
 @Component({
   selector: 'qd-menu',
@@ -13,17 +14,11 @@ import { ActivatedRoute } from '@angular/router';
 export class MenuComponent implements OnInit, OnDestroy {
   public items!: MenuItem[];
 
-  constructor(private menu_: MenuService, private activatedRoute_: ActivatedRoute,private realtime_: RealtimeService) {}
+  constructor(public cart_: CartService, private menu_: MenuService, private activatedRoute_: ActivatedRoute,private realtime_: RealtimeService) {}
   
   ngOnInit(): void {
-    // this.activatedRoute_.data.subscribe({
-    //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    //   next: (response: any) => this.items = response.items,
-    //   error: (error) => console.log(error) 
-    // });
+    this.cart_.syncCart();
     this.items = this.activatedRoute_.snapshot.data['items']
-
-    console.log(this.items);
 
     this.realtime_.record('menu').subscribe('*', data => {
       switch(data.action) {

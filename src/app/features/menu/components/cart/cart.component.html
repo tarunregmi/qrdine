@@ -1,0 +1,9 @@
+<div class="cart-page">
+  <div class="actions">
+    Table and other actions goes here...
+  </div>
+  
+  <div class="menu-items">
+    <qd-cart-item *ngFor="let item of cart_.cart()" [cart_]="cart_" [item]="item"></qd-cart-item>
+  </div>
+</div>
