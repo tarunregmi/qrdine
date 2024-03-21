@@ -8,10 +8,15 @@
 .actions {
   padding: 21px;
   background: #fff;
+  border-radius: 10px;
 }
 
 @media (max-width: 752px) {
   .cart-page {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
+}
+
+.mat-divider {
+  margin: 21px 0;
 }

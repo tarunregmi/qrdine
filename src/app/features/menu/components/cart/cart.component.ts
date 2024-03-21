@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/shared/services/login.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { MenuService } from '../../services/menu.service';
+import { OrderService } from 'src/app/shared/services/order.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginPopupComponent } from '../login-popup/login-popup.component';
 
 @Component({
   selector: 'qd-cart',
@@ -8,14 +12,26 @@ import { MenuService } from '../../services/menu.service';
   styleUrls: ['./cart.component.scss', '../../menu.component.scss'],
 })
 export class CartComponent implements OnInit {
-  public table!: string;
-  constructor(public menu_: MenuService, public cart_: CartService) {}
-  
+  constructor(public login_: LoginService, public menu_: MenuService, public cart_: CartService, private order_: OrderService, private dialog_: MatDialog) {}
+
   ngOnInit(): void {
     this.cart_.syncCart();
+    this.login_.updateIsLogin();
+    this.login_.updateSameOrigin();
   }
 
-  public change(): void {
-    console.log(this.table);
+  public makeLocalOrder(table: string): void {
+    this.order_.makeLocalOrder(this.cart_.cart, table);
+  }
+
+  public orderHomeDelivery(): void {
+    this.cart_.syncCart();
+    this.login_.updateIsLogin();
+
+    if (this.login_.isLogin()) {
+      console.log('Home delivery')
+    } else {
+      this.dialog_.open(LoginPopupComponent);
+    }
   }
 }

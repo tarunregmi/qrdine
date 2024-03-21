@@ -13,11 +13,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { MenuComponent } from './menu.component';
 import { ItemComponent } from './components/item/item.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
+import { TableComponent } from './components/table/table.component';
+import { OriginPopupComponent } from './components/origin-popup/origin-popup.component';
+import { PopupComponent } from './components/popup/popup.component';
+import { LoginPopupComponent } from './components/login-popup/login-popup.component';
 
 
 
@@ -26,7 +32,11 @@ import { CartItemComponent } from './components/cart-item/cart-item.component';
     MenuComponent,
     ItemComponent,
     CartComponent,
-    CartItemComponent
+    CartItemComponent,
+    TableComponent,
+    OriginPopupComponent,
+    PopupComponent,
+    LoginPopupComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +52,8 @@ import { CartItemComponent } from './components/cart-item/cart-item.component';
     MatDividerModule,
     MatProgressBarModule,
     MatCardModule,
+    MatButtonToggleModule,
+    MatDialogModule,
   ]
 })
 export class MenuModule { }
