@@ -1,4 +1,4 @@
-<div class="menu-page">
+<div class="menu-page" @fadeIn>
   <div class="sf">
     <div class="search-filter row">
 
@@ -30,7 +30,7 @@
   </div>
   
   <div class="menu-items" style="margin-top: 50px;">
-    <qd-item *ngFor="let item of menu_.menuItems()" [item]="item" [cart_]="cart_"></qd-item>
+    <qd-item *ngFor="let item of menu_.menuItems()" [item]="item" [cart_]="cart_" @fadeIn></qd-item>
   </div>
   <!-- <div></div> -->
 

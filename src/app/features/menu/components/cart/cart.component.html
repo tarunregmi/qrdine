@@ -1,4 +1,4 @@
-<div class="cart-page">
+<div class="cart-page" @fadeIn>
   <mat-card appearance="outlined" class="actions">
     <h4>Book Table:</h4>
     <qd-table (localOrder)="makeLocalOrder($event)"></qd-table>
@@ -11,6 +11,6 @@
   </mat-card>
   
   <div class="menu-items">
-    <qd-cart-item *ngFor="let item of cart_.cart()" [cart_]="cart_" [item]="item"></qd-cart-item>
+    <qd-cart-item *ngFor="let item of cart_.cart()" [cart_]="cart_" [item]="item" @fadeOut></qd-cart-item>
   </div>
 </div>

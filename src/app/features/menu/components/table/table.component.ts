@@ -10,11 +10,13 @@ import { OriginPopupComponent } from '../origin-popup/origin-popup.component';
 import { PopupComponent } from '../popup/popup.component';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { fadeIn } from 'src/app/shared/animations/fadeIn';
 
 @Component({
   selector: 'qd-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  animations: [ fadeIn ]
 })
 export class TableComponent implements OnInit, OnDestroy {
   @Output() localOrder = new EventEmitter<string>();

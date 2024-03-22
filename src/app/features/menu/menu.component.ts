@@ -8,11 +8,13 @@ import { CartService } from 'src/app/shared/services/cart.service';
 import { PageEvent } from '@angular/material/paginator';
 import { Location } from '@angular/common';
 import { Subject, Subscription, debounceTime } from 'rxjs';
+import { fadeIn } from 'src/app/shared/animations/fadeIn';
 
 @Component({
   selector: 'qd-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
+  animations: [ fadeIn ]
 })
 export class MenuComponent implements OnInit, OnDestroy {
   public searchedKeyword!: string;
