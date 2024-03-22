@@ -18,10 +18,13 @@ export class CartComponent implements OnInit {
     this.cart_.syncCart();
     this.login_.updateIsLogin();
     this.login_.updateSameOrigin();
+
+    window.scrollTo({ top: 0, behavior: 'instant'});
   }
 
   public makeLocalOrder(table: string): void {
     this.order_.makeLocalOrder(this.cart_.cart, table);
+    this.cart_.cart.set([]);
   }
 
   public orderHomeDelivery(): void {

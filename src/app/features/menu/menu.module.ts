@@ -15,6 +15,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { MenuComponent } from './menu.component';
 import { ItemComponent } from './components/item/item.component';
@@ -54,6 +58,10 @@ import { LoginPopupComponent } from './components/login-popup/login-popup.compon
     MatCardModule,
     MatButtonToggleModule,
     MatDialogModule,
+    MatMenuModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
   ]
 })
 export class MenuModule { }

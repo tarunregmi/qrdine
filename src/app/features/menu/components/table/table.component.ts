@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { tap } from 'rxjs';
 import { TableModel } from 'src/app/shared/models/table.model';
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment.development';
 import { OriginPopupComponent } from '../origin-popup/origin-popup.component';
 import { PopupComponent } from '../popup/popup.component';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'qd-table',
@@ -31,6 +31,7 @@ export class TableComponent implements OnInit, OnDestroy {
     private realtime_: RealtimeService,
     private dialog_: MatDialog,
     private route_: ActivatedRoute,
+    private router_: Router,
   ) {}
 
   ngOnInit(): void {
@@ -41,8 +42,13 @@ export class TableComponent implements OnInit, OnDestroy {
       // un-book previous scanned table (if it is)
       if (this.getBookedTable()) this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.getBookedTable()}`, { isAvailable: true }).subscribe();
 
-      // book new table
-      this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.bookedTable}`, { isAvailable: false }).subscribe();
+      if (this.isCartNotEmpty()) {
+        // book new table
+        localStorage.setItem('bookedTable', this.bookedTable);
+        this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.bookedTable}`, { isAvailable: false }).subscribe();
+      } else {
+        this.bookedTable = '';
+      }
     } else {
       // user manually access the website
       // get previously booked table (if it is)
@@ -54,27 +60,7 @@ export class TableComponent implements OnInit, OnDestroy {
         localStorage.removeItem('bookedTable');
         this.bookedTable = this.getBookedTable();
       }
-      
-      console.log(this.bookedTable);
     }
-
-    // if (this.bookedTable) {
-    //   // un-book previous scanned table (if it is)
-    //   if (this.getBookedTable()) {
-    //     if (this.getBookedTable() !== this.bookedTable) {
-    //       this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.getBookedTable()}`, { isAvailable: true }).subscribe();
-    //       this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.bookedTable}`, { isAvailable: false }).subscribe();
-    //     }
-    //   } else {
-    //     this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.bookedTable}`, { isAvailable: false }).subscribe();
-    //   }
-      
-    //   localStorage.setItem('bookedTable', this.bookedTable);
-    //   this.selectedTable = this.bookedTable;
-    // } else {
-    //   this.bookedTable = this.getBookedTable();
-    //   this.selectedTable = this.getBookedTable();
-    // }
 
     this.httpClient_.get(`${environment.baseURL}/api/collections/${this.collection}/records`)
     .pipe(
@@ -110,20 +96,25 @@ export class TableComponent implements OnInit, OnDestroy {
     this.login_.updateSameOrigin();
 
     if (this.login_.sameOrigin()) {
-      if(this.route_.snapshot.queryParamMap.get('table')) {
-        // if user scann qr code
-        this.dialog_.open(PopupComponent, { data: 'You are not allowed to change the table because you have scanned the table\'s QR. To change the table, scan the QR of the table you want.' });
-        setTimeout(() => this.selectedTable = this.getBookedTable(), 10);
+      if (this.isCartNotEmpty()) {
+        if(this.route_.snapshot.queryParamMap.get('table')) {
+          // if user scann qr code
+          this.dialog_.open(PopupComponent, { data: 'You are not allowed to change the table because you have scanned the table\'s QR. To change the table, scan the QR of the table you want.' });
+          setTimeout(() => this.selectedTable = this.getBookedTable(), 10);
+        } else {
+          this.bookedTable = this.getBookedTable();
+  
+          // un-book previous table (if it is booked)
+          if (this.bookedTable) this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.bookedTable}`, { isAvailable: true }).subscribe();
+          localStorage.setItem('bookedTable', this.selectedTable);
+  
+          // book new selected table
+          this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.selectedTable}`, { isAvailable: false }).subscribe();
+          this.bookedTable = this.selectedTable;
+        }
       } else {
-        this.bookedTable = this.getBookedTable();
-
-        // un-book previous table (if it is booked)
-        if (this.bookedTable) this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.bookedTable}`, { isAvailable: true }).subscribe();
-        localStorage.setItem('bookedTable', this.selectedTable);
-
-        // book new selected table
-        this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.selectedTable}`, { isAvailable: false }).subscribe();
-        this.bookedTable = this.selectedTable;
+        this.dialog_.open(PopupComponent, { data: 'Your cart is empty!' });
+        table.reset();
       }
     } else {
       this.dialog_.open(OriginPopupComponent);
@@ -138,9 +129,15 @@ export class TableComponent implements OnInit, OnDestroy {
     
     if (this.login_.sameOrigin()) {
       if (this.bookedTable) {
-        // console.log('Successful local order.');
-        this.localOrder.emit(this.bookedTable);
-        // console.log(this.bookedTable);
+        if (this.isCartNotEmpty()) {
+          this.localOrder.emit(this.bookedTable);
+          localStorage.removeItem('bookedTable');
+          localStorage.removeItem('cart');
+          this.router_.navigate(['/my-orders']);
+        } else {
+          this.dialog_.open(PopupComponent, { data: 'Your cart is empty!' });
+          this.bookedTable = '';
+        }
       } else {
         this.dialog_.open(PopupComponent, { data: 'Book your table first.' });
       }
@@ -164,5 +161,18 @@ export class TableComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.realtime_.unsubscribe(this.collection);
+  }
+
+  private isCartNotEmpty(): boolean {
+    return <number>localStorage.getItem('cart')?.length > 2; // cart = [] || cart = null
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHandler(event: Event) {
+    if (localStorage.getItem('bookedTable')) {
+      event.preventDefault();
+    } else {
+      console.log('ok')
+    }
   }
 }

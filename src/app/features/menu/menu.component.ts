@@ -3,8 +3,11 @@ import { MenuItem } from 'src/app/shared/models/menu.model';
 import { MenuService } from './services/menu.service';
 import { RealtimeService } from 'src/app/shared/services/realtime.service';
 import { environment } from 'src/environments/environment.development';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { CartService } from 'src/app/shared/services/cart.service';
+import { PageEvent } from '@angular/material/paginator';
+import { Location } from '@angular/common';
+import { Subject, Subscription, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'qd-menu',
@@ -12,38 +15,65 @@ import { CartService } from 'src/app/shared/services/cart.service';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit, OnDestroy {
-  public items!: MenuItem[];
+  public searchedKeyword!: string;
+  private searchSubject = new Subject<string>();
+  private searchSubscription!: Subscription;
 
-  constructor(public cart_: CartService, private menu_: MenuService, private activatedRoute_: ActivatedRoute,private realtime_: RealtimeService) {}
+  constructor(
+    public cart_: CartService,
+    public menu_: MenuService,
+    private router_: Router,
+    private realtime_: RealtimeService,
+    private location_: Location,
+  ) {}
   
   ngOnInit(): void {
     this.cart_.syncCart();
-    this.items = this.activatedRoute_.snapshot.data['items']
 
     this.realtime_.record('menu').subscribe('*', data => {
       switch(data.action) {
         case 'create': {
-          this.items.unshift(this.item(data.record));
+          this.menu_.menuItems().unshift(this.item(data.record));
+          this.menu_.menuItems().pop();
+          this.menu_.totalItems.update(current => current + 1);
           break;
         }
         case 'update': {
-          this.items.forEach((item, index) => {
-            if (item.id === data.record.id) this.items[index] = this.item(data.record)
+          this.menu_.menuItems().forEach((item, index) => {
+            if (item.id === data.record.id) this.menu_.menuItems()[index] = this.item(data.record)
           });
           break;
         }
         case 'delete': {
-          this.items.forEach((item, index) => {
-            if (item.id === data.record.id) this.items.splice(index, 1);
+          this.menu_.menuItems().forEach((item, index) => {
+            if (item.id === data.record.id) this.menu_.menuItems().splice(index, 1);
           })
+          this.menu_.totalItems.update(current => current - 1);
           break;
         }
       }
     });
+
+    this.searchSubject.pipe(debounceTime(500)).subscribe(searchValue => {
+      this.searchSubscription?.unsubscribe();
+      this.searchSubscription = this.menu_.getItems(`(title~'${searchValue}')`).subscribe();
+    });
+  }
+
+  public mpt(event: PageEvent) {
+    if (<number>event.previousPageIndex > event.pageIndex) this.location_.back();
+    else this.router_.navigate(['./', { page: event.pageIndex + 1 }], { queryParamsHandling: 'preserve' });
+    window.scrollTo({top: 0});
+  }
+
+  public search(): void {
+    this.searchSubject.next(this.searchedKeyword.trim());
   }
 
   ngOnDestroy(): void {
     this.realtime_.unsubscribe('menu');
+    this.searchSubject.unsubscribe();
+    this.searchSubscription?.unsubscribe();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
