@@ -6,6 +6,7 @@ import { NotfoundComponent } from './shared/components/notfound/notfound.compone
 const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./features/auth/auth.module').then((module) => module.AuthModule) },
   { path: 'menu', loadChildren: () => import('./features/menu/menu.module').then(module => module.MenuModule) },
+  { path: 'my-orders', loadChildren: () => import('./features/my-orders/my-orders.module').then(m => m.MyOrdersModule) },
   { path: '', component: HomeComponent, title: 'Home' },
   { path: '**', component: NotfoundComponent, title: 'Not Found' },
 ];

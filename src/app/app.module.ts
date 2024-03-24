@@ -7,8 +7,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 
 import { SharedModule } from './shared/shared.module';
-import { AuthModule } from './features/auth/auth.module';
-import { MenuModule } from './features/menu/menu.module';
 
 import { AppComponent } from './app.component';
 
@@ -20,8 +18,6 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    AuthModule,
-    MenuModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

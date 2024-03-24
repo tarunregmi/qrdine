@@ -21,6 +21,11 @@ export class LoginService {
     this.sameOrigin.set(this.sameOriginState());
   }
 
+  public updateAccessCredential(): void {
+    this.updateIsLogin();
+    this.updateSameOrigin();
+  }
+
   private isLoginState(): boolean {
     return Boolean(localStorage.getItem('loginToken') && localStorage.getItem('user'));
   }

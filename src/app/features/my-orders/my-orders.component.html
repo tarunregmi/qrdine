@@ -1,0 +1,13 @@
+<div class="my-orders-page column" @fadeIn>
+  <div *ngIf="isAccessible; else fallback">
+    <h3>Order History</h3>
+    <span>{{ order_.myOrders.length }} orders</span>
+    <div class="orders column">
+      <qd-order *ngFor="let order of order_.myOrders" [order]="order"></qd-order>
+    </div>
+  </div>
+
+  <ng-template #fallback>
+    <span style="text-align: center;">Please <a routerLink="/auth/login">log in</a> or connect to the hotel/restaurant <a href="{{ href }}">local network</a> to view this page.</span>
+  </ng-template>
+</div>

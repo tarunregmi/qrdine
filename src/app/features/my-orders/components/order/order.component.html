@@ -1,0 +1,49 @@
+<mat-card appearance="outlined" class="order" [class]="order.state">
+  <div class="status-banner"></div>
+  <div class="container column">
+    <span class="date">{{ order.date | date: 'medium' }}</span>
+
+    <div class="content">
+      <mat-card appearance="outlined" class="table-card">
+        <div class="table">
+          <table mat-table [dataSource]="order.items">
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef>Item</th>
+              <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+              <td mat-footer-cell *matFooterCellDef class="table-footer">Total</td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef>Quantity</th>
+              <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+              <td mat-footer-cell *matFooterCellDef class="table-footer"></td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef>Price</th>
+              <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+              <td mat-footer-cell *matFooterCellDef class="table-footer">{{ getTotalCost() | npr }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; let even=even; columns: displayedColumns;" [ngClass]="{gray: even}"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+          </table>
+        </div>
+      </mat-card>
+
+      <div class="actions column">
+        <button mat-stroked-button color="primary" class="status">{{ order.state | titlecase }}</button>
+        <button mat-flat-button color="warn" [disabled]="order.state !== 'pending'" (click)="order_.cancelOrder(order.id)">
+          <mat-icon fontIcon="remove_shopping_cart"></mat-icon>Cancel Order
+          <!-- 
+            pending: paced order by user but not verified by admin
+            confirmed: verified by admin but not serve yet
+            completed: served order
+            cancelled: user cancell their order
+          -->
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card>

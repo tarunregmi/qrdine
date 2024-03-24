@@ -14,6 +14,10 @@ export class RealtimeService {
 
   public unsubscribe(collection: string) {
     this.pb.collection(collection).unsubscribe('*');
-    this.pb.collection(collection).unsubscribe('');
+    this.pb.collection(collection).unsubscribe();
+  }
+
+  public unsubscribeRecord(collection: string, record: string) {
+    this.pb.collection(collection).unsubscribe(record);
   }
 }

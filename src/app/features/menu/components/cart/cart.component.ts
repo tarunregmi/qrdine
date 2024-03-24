@@ -11,22 +11,21 @@ import { fadeIn, fadeOut } from 'src/app/shared/animations/fadeIn';
   selector: 'qd-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss', '../../menu.component.scss'],
-  animations: [ fadeIn, fadeOut ]
+  animations: [fadeIn, fadeOut]
 })
 export class CartComponent implements OnInit {
-  constructor(public login_: LoginService, public menu_: MenuService, public cart_: CartService, private order_: OrderService, private dialog_: MatDialog) {}
+  constructor(public login_: LoginService, public menu_: MenuService, public cart_: CartService, private order_: OrderService, private dialog_: MatDialog) { }
 
   ngOnInit(): void {
     this.cart_.syncCart();
     this.login_.updateIsLogin();
     this.login_.updateSameOrigin();
 
-    window.scrollTo({ top: 0, behavior: 'instant'});
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
   public makeLocalOrder(table: string): void {
     this.order_.makeLocalOrder(this.cart_.cart, table);
-    this.cart_.cart.set([]);
   }
 
   public orderHomeDelivery(): void {
