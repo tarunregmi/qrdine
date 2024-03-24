@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
@@ -31,6 +32,7 @@ import { RealtimeService } from './services/realtime.service';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
+    MatMenuModule,
   ],
   exports: [
     ToolbarComponent,

@@ -1,0 +1,9 @@
+<div class="admin-page" @fadeIn>
+  <qd-dashboard *ngIf="login_.isAdmin(); else fallback"></qd-dashboard>
+  
+  <ng-template #fallback>
+    <div class="fallback-page column center">
+      <button mat-flat-button routerLink="./login" color="primary">Login as Admin</button>
+    </div>
+  </ng-template>
+</div>

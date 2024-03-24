@@ -14,24 +14,29 @@ export class AuthService {
   // inject other services
   constructor(private httpClient_: HttpClient, private login_: LoginService) {}
 
-  public login(credential: LoginformModel<string>) {
-    return this.httpClient_.post(`${environment.baseURL}/api/collections/users/auth-with-password`, credential).pipe(
+  public login(credential: LoginformModel<string>, username?: string) {
+    let collection = username || 'collections/users';
+    return this.httpClient_.post(`${environment.baseURL}/api/${collection}/auth-with-password`, credential).pipe(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       tap((response: any) => {
         const token = response.token;
-        const user: UserModel = {
-          id: response.record.id,
-          name: response.record.name,
-          email: response.record.email,
-          username: response.record.username,
-          avatar: response.record.avatar,
-          collectionId: response.record.collectionId,
-          verified: response.record.verified
-        };
+        if (!username) {
+          const user: UserModel = {
+            id: response.record.id,
+            name: response.record.name,
+            email: response.record.email,
+            username: response.record.username,
+            avatar: response.record.avatar,
+            collectionId: response.record.collectionId,
+            verified: response.record.verified
+          };
+          localStorage.setItem('user', JSON.stringify(user));
+        } else {
+          localStorage.setItem('user', JSON.stringify({ role: username }));
+        }
         
         // store login-token and user profile data on local storage
         localStorage.setItem('loginToken', token);
-        localStorage.setItem('user', JSON.stringify(user));
 
         // then update login-state (signal)
         this.login_.updateIsLogin();

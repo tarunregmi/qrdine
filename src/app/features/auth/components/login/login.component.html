@@ -1,8 +1,9 @@
 <form [formGroup]="form" (ngSubmit)="onLogin()" class="column">
-  <h1>Hi, Welcome Back! 👋</h1>
+  <h1>Hi, Welcome Back! 👋.</h1>
+  <span *ngIf="user" class="user">Please provide admin credential.</span>
 
   <mat-form-field appearance="outline" hideRequiredMarker="true">
-    <mat-label>Username or Email</mat-label>
+    <mat-label>{{ !user ? 'Username or '  : ''}}Email</mat-label>
     <input matInput type="text" formControlName="identity" />
     <mat-error>This field is required</mat-error>
   </mat-form-field>
@@ -18,17 +19,19 @@
 
   <button mat-flat-button color="primary" type="submit">Login</button>
 
-  <div class="hr row center">
-    <span>OR</span>
-  </div>
-
-  <button mat-stroked-button type="button">
-    <img src="/assets/google.svg" height="25" alt="Google" />
-    Login with Google
-  </button>
-
-  <p>
-    Don't have an account?
-    <a routerLink="/auth/signup">Sign Up</a>
-  </p>
+  <ng-container *ngIf="!user">
+    <div class="hr row center">
+      <span>OR</span>
+    </div>
+  
+    <button mat-stroked-button type="button">
+      <img src="/assets/google.svg" height="25" alt="Google" />
+      Login with Google
+    </button>
+  
+    <p>
+      Don't have an account?
+      <a routerLink="/auth/signup">Sign Up</a>
+    </p>
+  </ng-container>
 </form>

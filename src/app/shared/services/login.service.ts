@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class LoginService {
+  private readonly tokenKey: string = 'loginToken';
+  public readonly isAdmin = signal<boolean>(false);
   public readonly isLogin = signal<boolean>(this.isLoginState());
 
   /**
@@ -24,6 +26,28 @@ export class LoginService {
   public updateAccessCredential(): void {
     this.updateIsLogin();
     this.updateSameOrigin();
+  }
+
+  public logOut(): void {
+    this.isAdmin.set(false);
+    this.isLogin.set(false);
+    localStorage.removeItem('loginToken');
+    localStorage.removeItem('user');
+    window.location.reload();
+  }
+
+  public validateAdmin(): boolean {
+    const token = localStorage.getItem(this.tokenKey);
+    if (token) {
+      if (JSON.parse(atob(token.split('.')[1])).type === 'admin') {
+        console.log('You r admin');
+        this.isAdmin.set(true);
+        return true;
+      }
+    }
+
+    this.isAdmin.set(false);
+    return false;
   }
 
   private isLoginState(): boolean {

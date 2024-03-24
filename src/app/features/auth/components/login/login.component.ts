@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginformModel } from 'src/app/shared/models/loginform.model';
 import { AuthService } from '../../services/auth.service';
@@ -12,13 +12,17 @@ import { Location } from '@angular/common';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy  {
+  @Input() public user!: string;
   // Subscriber/Observer
   private subscriber!: Subscription;
 
   public password = true;
   public form!: FormGroup<LoginformModel<FormControl>>;
 
-  constructor(private auth_: AuthService, private location_: Location) {}
+  constructor(
+    private auth_: AuthService,
+    private location_: Location,
+  ) {}
 
   ngOnInit(): void {
     this.form = new FormGroup<LoginformModel<FormControl>>({
@@ -29,7 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
 
   public onLogin(): void {
     if (this.form.valid) {
-      this.subscriber = this.auth_.login(<LoginformModel<string>>this.form.value).subscribe({
+      this.subscriber = this.auth_.login(<LoginformModel<string>>this.form.value, this.user).subscribe({
         error: (response: HttpErrorResponse) => console.log(response.error.message),
         complete: () => this.location_.back()
       });

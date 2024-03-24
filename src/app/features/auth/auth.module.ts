@@ -15,7 +15,11 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
-  declarations: [AuthComponent, LoginComponent, SignupComponent],
+  declarations: [
+    AuthComponent,
+    LoginComponent,
+    SignupComponent
+  ],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -27,5 +31,8 @@ import { SignupComponent } from './components/signup/signup.component';
     MatCheckboxModule,
     MatFormFieldModule,
   ],
+  exports: [
+    LoginComponent,
+  ]
 })
 export class AuthModule {}
