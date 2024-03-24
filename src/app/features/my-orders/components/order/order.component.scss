@@ -20,6 +20,13 @@
   }
 }
 
+.order.confirmed {
+  .status-banner, .status {
+    color: #fff;
+    background: #508d00;
+  }
+}
+
 .order.cancelled {
   .status-banner, .status {
     color: #fff;
