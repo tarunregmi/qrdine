@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'qd-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
   constructor(
     private auth_: AuthService,
     private location_: Location,
+    private snackbar_: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +36,10 @@ export class LoginComponent implements OnInit, OnDestroy  {
   public onLogin(): void {
     if (this.form.valid) {
       this.subscriber = this.auth_.login(<LoginformModel<string>>this.form.value, this.user).subscribe({
-        error: (response: HttpErrorResponse) => console.log(response.error.message),
+        error: (response: HttpErrorResponse) => {
+          console.log(response.error.message);
+          this.snackbar_.open(response.error.message, undefined, { duration: 3500});
+        },
         complete: () => this.location_.back()
       });
     }
