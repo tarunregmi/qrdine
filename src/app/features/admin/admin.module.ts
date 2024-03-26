@@ -12,6 +12,7 @@ import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { HighlightsComponent } from './components/dashboard/highlights/highlights.component';
+import { GraphComponent } from './components/dashboard/graph/graph.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { HighlightsComponent } from './components/dashboard/highlights/highlight
     DashboardComponent,
     AuthComponent,
     HighlightsComponent,
+    GraphComponent,
   ],
   imports: [
     CommonModule,

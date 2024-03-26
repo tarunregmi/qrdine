@@ -3,7 +3,7 @@ import { MenuItem } from '../models/menu.model';
 import { LoginService } from './login.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
-import { pipe, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { OrderModel } from '../models/order.model';
 import { RealtimeService } from './realtime.service';
 
@@ -33,7 +33,7 @@ export class OrderService {
     if (this.login_.isLogin()) order = { items, table, username: JSON.parse(<string>localStorage.getItem('user')).id };
     else order = { items, table };
 
-    this.httpClient_.post(`${environment.baseURL}/api/collections/orders/records`, { ...order, state: 'pending' })
+    this.httpClient_.post(`${environment.baseURL}/api/collections/local_orders/records`, { ...order, state: 'pending' })
       .pipe(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         tap((response: any) => {
@@ -47,7 +47,7 @@ export class OrderService {
   }
 
   public cancelOrder(id: string): void {
-    this.httpClient_.patch(`${environment.baseURL}/api/collections/orders/records/${id}`, { state: 'cancelled'}).subscribe();
+    this.httpClient_.patch(`${environment.baseURL}/api/collections/local_orders/records/${id}`, { state: 'cancelled'}).subscribe();
   }
 
   public syncMyOrders() {
@@ -58,12 +58,14 @@ export class OrderService {
     this.syncMyOrders();
     
     if (this.myOrders.length > 0) {
-      this.httpClient_.get(`${environment.baseURL}/api/collections/orders/records`)
+      this.httpClient_.get(`${environment.baseURL}/api/collections/local_orders/records`)
         .pipe(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           tap((response: any) => {
             console.log(response);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             response.items.forEach((entry: any) => {
-              let order = this.myOrders.find(order => order.id === entry.id);
+              const order = this.myOrders.find(order => order.id === entry.id);
               if (order) {
                 order.state = entry.state;
                 this.updateMyOrdersInLocal();
@@ -71,7 +73,7 @@ export class OrderService {
                 // realtime
                 // subscribe order
                 if (order.state === 'pending' || order.state === 'confirmed') {
-                  this.realtime_.record('orders').subscribe(order.id, event => {
+                  this.realtime_.record('local_orders').subscribe(order.id, event => {
                     console.log(event);
                     if (order?.id === event.record.id) {
                       order.state = event.record?.['state'];
@@ -79,7 +81,7 @@ export class OrderService {
 
                       // un-subscribe order
                       if (order.state === 'cancelled' || order.state === 'completed') {
-                        this.realtime_.unsubscribeRecord('orders', order.id);
+                        this.realtime_.unsubscribeRecord('local_orders', order.id);
                       }
                     }
                   });
@@ -94,7 +96,7 @@ export class OrderService {
   }
 
   public unSubscribeRealtime(): void {
-    this.realtime_.unsubscribe('orders');
+    this.realtime_.unsubscribe('local_orders');
   }
 
   private updateMyOrdersInLocal() {

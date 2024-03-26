@@ -15,7 +15,7 @@ export class AuthService {
   constructor(private httpClient_: HttpClient, private login_: LoginService) {}
 
   public login(credential: LoginformModel<string>, username?: string) {
-    let collection = username || 'collections/users';
+    const collection = username || 'collections/users';
     return this.httpClient_.post(`${environment.baseURL}/api/${collection}/auth-with-password`, credential).pipe(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       tap((response: any) => {

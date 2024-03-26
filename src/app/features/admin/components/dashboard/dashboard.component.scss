@@ -22,22 +22,27 @@ mat-card {
   .mat-mdc-card {
     display: grid;
     grid-template-columns: auto max-content;
+    font-weight: 500;
+
+    .column {
+      justify-content: space-between;
+    }
 
     .lable {
-      font-size: 1.1em;
-      font-weight: 500;
-    }
-    .lable,
-    .compare {
       color: #6b7280;
-      span {
-        color: #c79807;
-      }
+      font-size: 1.1em;
+    }
+
+    .sub-lable{
+      font-size: .7rem;
+      color: #768092;
     }
 
     .point {
-      font-weight: 500;
-      color: #575e6d;
+      padding-top: 21px;
+      color: #c79807;
+      font-size: 1.3rem;
+      justify-self: flex-end;
     }
 
     mat-icon {
@@ -52,6 +57,7 @@ mat-card {
 
   .column {
     height: 100%;
+    overflow: hidden;
   }
 }
 
