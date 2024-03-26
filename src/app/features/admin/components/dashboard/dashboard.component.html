@@ -1,25 +1,16 @@
-<div class="dashboard ds-page">
-  <mat-card appearance="outlined" class="sidebar">
-    <span>sidebar here</span>
-    <span>Local Orders</span>
-    <span>Remote Orders</span>
-    <span>Menu</span>
-  </mat-card>
+<div class="dashboard column">
+  <qd-highlights></qd-highlights>
 
-  <div class="main-content column">
-    <qd-highlights></qd-highlights>
-
-    <div class="table-graphs">
-      <div class="column">
-        <mat-card appearance="outlined">
-          <span>Table Status</span>
-        </mat-card>
-      </div>
-      <div class="column">
-        <mat-card appearance="outlined">
-          <qd-graph></qd-graph>
-        </mat-card>
-      </div>
+  <div class="table-graphs">
+    <div class="column">
+      <mat-card appearance="outlined">
+        <span>Table Status</span>
+      </mat-card>
+    </div>
+    <div class="column">
+      <mat-card appearance="outlined">
+        <qd-graph></qd-graph>
+      </mat-card>
     </div>
   </div>
 </div>

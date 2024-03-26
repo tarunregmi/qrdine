@@ -1,5 +1,8 @@
-<div class="admin-page" @fadeIn>
-  <qd-dashboard *ngIf="login_.isAdmin(); else fallback"></qd-dashboard>
+<div class="any-page" @fadeIn>
+  <div *ngIf="login_.isAdmin(); else fallback" class="admin-page">
+    <qd-sidebar class="sidebar"></qd-sidebar>
+    <div><router-outlet></router-outlet></div>
+  </div>
   
   <ng-template #fallback>
     <div class="fallback-page column center">

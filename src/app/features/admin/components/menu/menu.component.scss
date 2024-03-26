@@ -1,0 +1,44 @@
+.table-card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table-card {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.table {
+  overflow: auto;
+  max-height: 60vh;
+}
+
+.actions {
+  gap: 21px;
+  justify-content: center;
+}
+
+.mat-mdc-paginator {
+  border-top: 1px solid var(--mat-table-row-item-outline-color);
+}
+
+.gray {
+  background-color: rgb(249 249 249);
+}
+
+.mat-mdc-cell {
+  border: none !important;
+}
+
+
+.mat-column-price {
+  text-align: center;
+}
+
+.mat-column-action {
+  text-align: end;
+}
+
+.mat-mdc-card-avatar {
+  margin-bottom: 0;
+}

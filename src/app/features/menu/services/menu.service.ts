@@ -39,6 +39,19 @@ export class MenuService {
     .pipe(map(response => this.item(response)))
   }
 
+  public addItem(item: unknown): Observable<MenuItem> {
+    return this.httpClient_.post<MenuItem>(`${environment.baseURL}/api/collections/menu/records`, item);
+  }
+
+  public editItem(id: string, item: unknown): Observable<MenuItem> {
+    return this.httpClient_.patch<MenuItem>(`${environment.baseURL}/api/collections/menu/records/${id}`, item);
+  }
+
+  public deleteItem(id: string): Observable<MenuItem> {
+    return this.httpClient_.delete<MenuItem>(`${environment.baseURL}/api/collections/menu/records/${id}`);
+  }
+  
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private item(data: any) {
     return {

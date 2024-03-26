@@ -1,5 +1,4 @@
 .dashboard,
-.main-content,
 .highlights,
 .table-graphs {
   gap: 21px;
@@ -8,11 +7,6 @@
 mat-card {
   padding: 21px;
   border-radius: 7px;
-}
-
-.dashboard {
-  display: grid;
-  grid-template-columns: 260px auto;
 }
 
 .highlights {
@@ -78,13 +72,6 @@ mat-card {
 }
 
 @media (max-width: 700px) {
-  .dashboard {
-    display: block;
-  }
-  .sidebar {
-    display: none;
-  }
-
   .highlights {
     grid-template-columns: repeat(2, 1fr);
   }
