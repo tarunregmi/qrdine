@@ -6,11 +6,13 @@ import { EditMenuPopupComponent } from './edit-menu-popup/edit-menu-popup.compon
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PageEvent } from '@angular/material/paginator';
+import { fadeIn } from 'src/app/shared/animations/fadeIn';
 
 @Component({
   selector: 'qd-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
+  animations: [ fadeIn ]
 })
 export class MenuComponent implements OnInit {
   public data: MenuItem[] = [];
