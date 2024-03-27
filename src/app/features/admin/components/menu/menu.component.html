@@ -41,10 +41,10 @@
     </div>
 
     <mat-paginator
-      [length]="data.length"
-      [pageSize]="15"
-      [pageIndex]="0"
-      hidePageSize="true">
+      [length]="menu_.totalItems()"
+      [pageSize]="menu_.pageSize()"
+      hidePageSize="true"
+      (page)="changePage($event)">
     </mat-paginator>
   </mat-card>
 </div>

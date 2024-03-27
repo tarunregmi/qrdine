@@ -5,6 +5,7 @@ import { MenuItem } from 'src/app/shared/models/menu.model';
 import { EditMenuPopupComponent } from './edit-menu-popup/edit-menu-popup.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'qd-menu',
@@ -16,13 +17,13 @@ export class MenuComponent implements OnInit {
   public displayedColumns: string[] = ['thumbnail', 'title', 'price', 'action'];
 
   constructor (
-    private menu_: MenuService,
+    public menu_: MenuService,
     private dialog_: MatDialog,
     private snackbar_: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
-    this.menu_.pageSize.set(15);
+    this.menu_.pageSize.set(10);
     this.refreshMenu();
   }
   
@@ -78,12 +79,20 @@ export class MenuComponent implements OnInit {
     });
   }
 
+  /**
+   * @description change menu when paginator change it's page-index
+   */
+  public changePage(event: PageEvent) {
+    this.refreshMenu(event.pageIndex + 1);
+  }
+
 
   private showHttpErrorResponse(response: HttpErrorResponse) {
     this.snackbar_.open(response.error.message, undefined, { duration: 3500 });
   }
 
-  private refreshMenu(): void {
+  private refreshMenu(page?: number): void {
+    if (page) this.menu_.pageIndex.set(page);
     this.menu_.getItems().subscribe(response => this.data = response)
   }
 }
