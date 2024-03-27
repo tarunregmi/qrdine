@@ -71,7 +71,6 @@ export class MenuComponent implements OnInit {
         },
         error: (response: HttpErrorResponse) => this.showHttpErrorResponse(response),
       });
-      console.log(body);
     });
 
     dialogRef.afterClosed().subscribe(() => {
