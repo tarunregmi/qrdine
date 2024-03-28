@@ -134,8 +134,6 @@ export class TableComponent implements OnInit, OnDestroy {
   beforeUnloadHandler(event: Event) {
     if (localStorage.getItem('bookedTable')) {
       event.preventDefault();
-    } else {
-      console.log('ok')
     }
   }
 }
