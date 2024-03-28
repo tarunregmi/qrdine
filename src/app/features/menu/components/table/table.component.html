@@ -1,6 +1,6 @@
 <form class="table-selection column" (ngSubmit)="orderLocally()" #tableForm="ngForm">
   <mat-button-toggle-group name="table" [(ngModel)]="selectedTable" (change)="changeTable(tableForm)">
-    <mat-button-toggle *ngFor="let table of tables" [value]="table.id" [disabled]="!table.isAvailable && table.id !== bookedTable" [checked]="table.id === bookedTable" @fadeIn>
+    <mat-button-toggle *ngFor="let table of table_.tables" [value]="table.id" [disabled]="!table.isAvailable && table.id !== bookedTable" [checked]="table.id === bookedTable" @fadeIn>
       {{ table.name }}
     </mat-button-toggle>
   </mat-button-toggle-group>
