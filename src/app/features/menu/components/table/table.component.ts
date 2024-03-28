@@ -1,16 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { tap } from 'rxjs';
-import { TableModel } from 'src/app/shared/models/table.model';
 import { LoginService } from 'src/app/shared/services/login.service';
-import { RealtimeService } from 'src/app/shared/services/realtime.service';
 import { environment } from 'src/environments/environment.development';
 import { OriginPopupComponent } from '../origin-popup/origin-popup.component';
-import { PopupComponent } from '../popup/popup.component';
+import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fadeIn } from 'src/app/shared/animations/fadeIn';
+import { TableService } from 'src/app/shared/services/table.service';
 
 @Component({
   selector: 'qd-table',
@@ -23,14 +21,13 @@ export class TableComponent implements OnInit, OnDestroy {
 
   public bookedTable!: string;
   public selectedTable!: string;
-  public tables: TableModel[] = [];
 
   private readonly collection: string = "tables";
 
   constructor(
+    public table_: TableService,
     private login_: LoginService,
     private httpClient_: HttpClient,
-    private realtime_: RealtimeService,
     private dialog_: MatDialog,
     private route_: ActivatedRoute,
     private router_: Router,
@@ -64,34 +61,7 @@ export class TableComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.httpClient_.get(`${environment.baseURL}/api/collections/${this.collection}/records`)
-    .pipe(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      tap((response: any) => {
-        this.tables = response.items.map((item: unknown) => this.table(item));
-      })
-    ).subscribe();
-
-    this.realtime_.record(this.collection).subscribe('*', data => {
-      switch(data.action) {
-        case 'create': {
-          this.tables.push(this.table(data.record));
-          break;
-        }
-        case 'update': {
-          this.tables.forEach((table, index) => {
-            if (table.id === data.record.id) this.tables[index] = this.table(data.record)
-          });
-          break;
-        }
-        case 'delete': {
-          this.tables.forEach((table, index) => {
-            if (table.id === data.record.id) this.tables.splice(index, 1);
-          })
-          break;
-        }
-      }
-    });
+    this.table_.subscribeRealtime();
   }
 
   public changeTable(table: NgForm): void {
@@ -148,21 +118,12 @@ export class TableComponent implements OnInit, OnDestroy {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private table(data: any): TableModel{
-    return {
-      id: data.id,
-      name: data.name,
-      isAvailable: data.isAvailable
-    }
-  }
-
   private getBookedTable(): string {
     return <string>localStorage.getItem('bookedTable');
   }
 
   ngOnDestroy(): void {
-    this.realtime_.unsubscribe(this.collection);
+    this.table_.unsubscribeRealtime();
   }
 
   private isCartNotEmpty(): boolean {
@@ -173,8 +134,6 @@ export class TableComponent implements OnInit, OnDestroy {
   beforeUnloadHandler(event: Event) {
     if (localStorage.getItem('bookedTable')) {
       event.preventDefault();
-    } else {
-      console.log('ok')
     }
   }
 }

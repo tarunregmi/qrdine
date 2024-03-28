@@ -26,7 +26,6 @@ import { CartComponent } from './components/cart/cart.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { TableComponent } from './components/table/table.component';
 import { OriginPopupComponent } from './components/origin-popup/origin-popup.component';
-import { PopupComponent } from './components/popup/popup.component';
 import { LoginPopupComponent } from './components/login-popup/login-popup.component';
 
 
@@ -39,7 +38,6 @@ import { LoginPopupComponent } from './components/login-popup/login-popup.compon
     CartItemComponent,
     TableComponent,
     OriginPopupComponent,
-    PopupComponent,
     LoginPopupComponent
   ],
   imports: [
