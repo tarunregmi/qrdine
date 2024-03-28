@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 
 import PocketBase from 'pocketbase';
@@ -13,7 +13,7 @@ interface Highlights {
   templateUrl: './highlights.component.html',
   styleUrls: ['../dashboard.component.scss']
 })
-export class HighlightsComponent implements OnInit {
+export class HighlightsComponent implements OnInit, OnDestroy {
   public localOrders: Highlights = { total: 0 };
   public remoteOrders: Highlights = { total: 0 };
 
@@ -75,5 +75,12 @@ export class HighlightsComponent implements OnInit {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.totalRevenue = response?.items.reduce((acc: number, item: any) => acc+item.money, 0);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.pb.collection('local_orders').unsubscribe('*');
+    this.pb.collection('local_orders').unsubscribe();
+    this.pb.collection('remote_orders').unsubscribe('*');
+    this.pb.collection('remote_orders').unsubscribe();
   }
 }

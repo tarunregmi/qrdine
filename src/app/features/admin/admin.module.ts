@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthModule } from '../auth/auth.module';
@@ -10,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -24,6 +26,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { EditMenuPopupComponent } from './components/menu/edit-menu-popup/edit-menu-popup.component';
 import { TablesComponent } from './components/dashboard/tables/tables.component';
+import { LocalOrdersComponent } from './components/local-orders/local-orders.component';
 
 
 @NgModule({
@@ -37,10 +40,12 @@ import { TablesComponent } from './components/dashboard/tables/tables.component'
     SidebarComponent,
     EditMenuPopupComponent,
     TablesComponent,
+    LocalOrdersComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     SharedModule,
     AuthModule,
@@ -50,6 +55,7 @@ import { TablesComponent } from './components/dashboard/tables/tables.component'
     MatPaginatorModule,
     MatTableModule,
     MatDialogModule,
+    MatSelectModule,
     MatInputModule,
     MatFormFieldModule,
     MatSnackBarModule

@@ -4,6 +4,7 @@ import { AdminComponent } from './admin.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { LocalOrdersComponent } from './components/local-orders/local-orders.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent, title: 'Admin - Dashboard' },
       { path: 'menu', component: MenuComponent, title: 'Admin - Menu' },
+      { path: 'local-orders', component: LocalOrdersComponent, title: 'Admin - Local Orders' },
     ],
   },
   { path: 'login', component: AuthComponent, title: 'Admin - Login' },
