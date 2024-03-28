@@ -7,5 +7,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./popup.component.scss']
 })
 export class PopupComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public message: string) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public message: string
+  ) {}
 }

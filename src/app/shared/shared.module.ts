@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
@@ -16,6 +17,7 @@ import { LoginService } from './services/login.service';
 import { NprPipe } from './pipes/npr.pipe';
 import { EllipsisPipe } from './pipes/ellipsis.pipe';
 import { RealtimeService } from './services/realtime.service';
+import { PopupComponent } from './components/popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { RealtimeService } from './services/realtime.service';
     LoaderComponent,
     NprPipe,
     EllipsisPipe,
+    PopupComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +36,7 @@ import { RealtimeService } from './services/realtime.service';
     MatButtonModule,
     MatToolbarModule,
     MatMenuModule,
+    MatDialogModule,
   ],
   exports: [
     ToolbarComponent,
