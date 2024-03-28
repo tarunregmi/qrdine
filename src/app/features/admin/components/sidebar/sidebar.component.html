@@ -1,6 +1,6 @@
 <mat-card appearance="outlined" class="sidebar">
-  <span>sidebar here</span>
-  <span>Local Orders</span>
-  <span>Remote Orders</span>
-  <a routerLink="./menu">Menu</a>
+  <a routerLink="./" class="nav" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+  <a routerLink="./local-orders" class="nav" routerLinkActive="active">Local Orders</a>
+  <a routerLink="./remote-orders" class="nav" routerLinkActive="active">Remote Orders</a>
+  <a routerLink="./menu" class="nav" routerLinkActive="active">Menu</a>
 </mat-card>

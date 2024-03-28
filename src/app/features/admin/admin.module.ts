@@ -23,6 +23,7 @@ import { GraphComponent } from './components/dashboard/graph/graph.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { EditMenuPopupComponent } from './components/menu/edit-menu-popup/edit-menu-popup.component';
+import { TablesComponent } from './components/dashboard/tables/tables.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { EditMenuPopupComponent } from './components/menu/edit-menu-popup/edit-m
     MenuComponent,
     SidebarComponent,
     EditMenuPopupComponent,
+    TablesComponent,
   ],
   imports: [
     CommonModule,

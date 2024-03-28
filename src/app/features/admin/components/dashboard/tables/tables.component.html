@@ -1,0 +1,17 @@
+<table class="status-table">
+  <thead>
+    <tr>
+      <th class="name">Table</th>
+      <th class="status" colspan="2">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let table of table_.tables" [class.booked]="!table.isAvailable" @fadeIn>
+      <td>{{ table.name }}</td>
+      <td>{{ table.isAvailable ? 'Available' : 'Booked' }}</td>
+      <td>
+        <button (click)="table_.updateTable(table.id, !table.isAvailable)">Make It {{ table.isAvailable ? 'Not' : '' }} Available</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
