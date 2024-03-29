@@ -7,11 +7,6 @@ import { tap } from 'rxjs';
 import { OrderModel } from '../models/order.model';
 import { RealtimeService } from './realtime.service';
 
-interface item {
-  id: string;
-  quantity: number;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -26,12 +21,17 @@ export class OrderService {
   ) {}
 
   public makeLocalOrder(cart: WritableSignal<MenuItem[]>, table: string) {
-    const items: item[] = [];
-    cart().forEach(entry => items.push({ id: entry.id, quantity: <number>entry.quantity }));
+    const items: string[] = [];
+    const quantity: Record<string, number> = {};
+    
+    cart().forEach(entry => {
+      items.push(entry.id);
+      quantity[entry.id] = <number>entry.quantity;
+    });
 
     let order;
-    if (this.login_.isLogin()) order = { items, table, username: JSON.parse(<string>localStorage.getItem('user')).id };
-    else order = { items, table };
+    if (this.login_.isLogin()) order = { items, quantity, table, username: JSON.parse(<string>localStorage.getItem('user')).id };
+    else order = { items, quantity, table };
 
     this.httpClient_.post(`${environment.baseURL}/api/collections/local_orders/records`, { ...order, state: 'pending' })
       .pipe(
