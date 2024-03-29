@@ -7,3 +7,11 @@ export interface OrderModel {
   table: string;
   state: 'pending' | 'confirmed' | 'completed' | 'cancelled';
 }
+
+export interface Item {
+  id: string,
+  title: string;
+  veg: boolean;
+  price: number;
+  quantity: number;
+}
