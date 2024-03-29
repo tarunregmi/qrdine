@@ -1,0 +1,41 @@
+.user-details {
+  padding: 21px;
+}
+
+.avatar {
+  border-radius: 7px;
+  margin-bottom: 10px;
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  object-position: center;
+  background: chocolate;
+}
+
+.names {
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.full-name {
+  font-size: 1.1rem;
+}
+
+.username {
+  font-size: 0.9rem;
+  color: rgb(0 0 0 / .6);
+}
+
+.action {
+  margin-top: 21px;
+}
+
+.contacts {
+  gap: 5px;
+  
+  .row {
+    gap: 10px;
+    align-items: center;
+  }
+}

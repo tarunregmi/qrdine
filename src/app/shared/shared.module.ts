@@ -19,6 +19,7 @@ import { EllipsisPipe } from './pipes/ellipsis.pipe';
 import { RealtimeService } from './services/realtime.service';
 import { PopupComponent } from './components/popup/popup.component';
 import { YesNoPopupComponent } from './components/yes-no-popup/yes-no-popup.component';
+import { UserPopupComponent } from './components/user-popup/user-popup.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { YesNoPopupComponent } from './components/yes-no-popup/yes-no-popup.comp
     EllipsisPipe,
     PopupComponent,
     YesNoPopupComponent,
+    UserPopupComponent,
   ],
   imports: [
     CommonModule,

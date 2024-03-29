@@ -1,0 +1,23 @@
+<div class="user-details column">
+  <img draggable="false" [src]="avatar" alt="{{ user.name }}" class="avatar">
+
+  <div class="names row">
+    <div class="column">
+      <span class="full-name">{{ user.name }}</span>
+      <span class="username">{{ user.username }}</span>
+    </div>
+    <mat-icon *ngIf="user.verified" fontIcon="verified" color="primary"></mat-icon>
+  </div>
+  <div class="contacts column">
+    <div class="row">
+      <mat-icon fontIcon="call"></mat-icon>
+      <a href="tel:+977{{user.phone}}">{{ user.phone }}</a>
+    </div>
+    <div class="row">
+      <mat-icon fontIcon="alternate_email"></mat-icon>
+      <a href="mailto:tarun@gmail.com">{{ user.email }}</a>
+    </div>
+  </div>
+
+  <button *ngIf="!user.verified" mat-flat-button color="primary" class="action" (click)="verifyUser()">Verify User</button>
+</div>

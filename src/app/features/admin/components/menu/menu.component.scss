@@ -47,6 +47,11 @@
   text-align: center;
 }
 
-.date {
+.date,
+.mat-column-user {
   white-space: nowrap;
+
+  .mat-icon {
+    font-size: 1.1rem;
+  }
 }

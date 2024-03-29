@@ -47,4 +47,8 @@ export class AuthService {
   public signup(credential: SignupformModel<string>) {
     return this.httpClient_.post(`${environment.baseURL}/api/collections/users/records`, credential);
   }
+
+  public verifyUser(id: string) {
+    return this.httpClient_.patch(`${environment.baseURL}/api/collections/users/records/${id}`, { verified: true });
+  }
 }

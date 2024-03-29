@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { fadeIn } from 'src/app/shared/animations/fadeIn';
+import { UserPopupComponent } from 'src/app/shared/components/user-popup/user-popup.component';
 import { LocalOrderModel } from 'src/app/shared/models/local.order.model';
+import { UserModel } from 'src/app/shared/models/user.model';
 import { LocalOrdersService } from 'src/app/shared/services/local-orders.service';
 
 @Component({
@@ -15,6 +18,7 @@ export class LocalOrdersComponent implements OnInit, OnDestroy {
 
   constructor(
     public localOrders_: LocalOrdersService,
+    public dialog_: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -23,6 +27,10 @@ export class LocalOrdersComponent implements OnInit, OnDestroy {
 
   public onStateChange(order: LocalOrderModel) {
     this.localOrders_.changeOrderState(order);
+  }
+
+  public showUserDetails(user: UserModel) {
+    this.dialog_.open(UserPopupComponent, { data: user });
   }
   
   /**
