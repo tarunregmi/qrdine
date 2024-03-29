@@ -3,4 +3,5 @@ export interface QueryParams {
   perPage?: number;
   sort?: string;
   filter?: string;
+  expand?: string;
 }
