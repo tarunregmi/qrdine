@@ -5,7 +5,6 @@ import { environment } from 'src/environments/environment.development';
 import { LoginformModel } from 'src/app/shared/models/loginform.model';
 import { UserModel } from 'src/app/shared/models/user.model';
 import { LoginService } from 'src/app/shared/services/login.service';
-import { SignupformModel } from 'src/app/shared/models/signupform.model';
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +43,7 @@ export class AuthService {
     );
   }
 
-  public signup(credential: SignupformModel<string>) {
+  public signup(credential: FormData) {
     return this.httpClient_.post(`${environment.baseURL}/api/collections/users/records`, credential);
   }
 

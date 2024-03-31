@@ -4,4 +4,5 @@ export interface SignupformModel<type> {
   email:            type;
   password:         type;
   passwordConfirm?: type;
+  avatar:           type;
 }
