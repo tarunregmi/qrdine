@@ -6,6 +6,8 @@ import { OrderService } from 'src/app/shared/services/order.service';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginPopupComponent } from '../login-popup/login-popup.component';
 import { fadeIn, fadeOut } from 'src/app/shared/animations/fadeIn';
+import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
+import { RemoteOrdersFormComponent } from '../remote-orders-form/remote-orders-form.component';
 
 @Component({
   selector: 'qd-cart',
@@ -14,7 +16,13 @@ import { fadeIn, fadeOut } from 'src/app/shared/animations/fadeIn';
   animations: [fadeIn, fadeOut]
 })
 export class CartComponent implements OnInit {
-  constructor(public login_: LoginService, public menu_: MenuService, public cart_: CartService, private order_: OrderService, private dialog_: MatDialog) { }
+  constructor(
+    public login_: LoginService,
+    public menu_: MenuService,
+    public cart_: CartService,
+    private order_: OrderService,
+    private dialog_: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.cart_.syncCart();
@@ -29,11 +37,14 @@ export class CartComponent implements OnInit {
   }
 
   public orderHomeDelivery(): void {
-    this.cart_.syncCart();
     this.login_.updateIsLogin();
 
     if (this.login_.isLogin()) {
-      console.log('Home delivery')
+      if (this.cart_.cart().length < 1) {
+        this.dialog_.open(PopupComponent, { data: 'Your cart is empty!' });
+      } else {
+        this.dialog_.open(RemoteOrdersFormComponent, { data: this.cart_.cart });
+      }
     } else {
       this.dialog_.open(LoginPopupComponent);
     }

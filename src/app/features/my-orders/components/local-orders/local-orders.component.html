@@ -1,0 +1,4 @@
+<span class="counter">You have <b>{{ myOrder_.myOrders.length }}</b> local orders.</span>
+<div class="orders column">
+  <qd-order *ngFor="let order of myOrder_.myOrders" [order]="order"></qd-order>
+</div>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuRoutingModule } from './menu-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -27,6 +27,7 @@ import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { TableComponent } from './components/table/table.component';
 import { OriginPopupComponent } from './components/origin-popup/origin-popup.component';
 import { LoginPopupComponent } from './components/login-popup/login-popup.component';
+import { RemoteOrdersFormComponent } from './components/remote-orders-form/remote-orders-form.component';
 
 
 
@@ -38,12 +39,14 @@ import { LoginPopupComponent } from './components/login-popup/login-popup.compon
     CartItemComponent,
     TableComponent,
     OriginPopupComponent,
-    LoginPopupComponent
+    LoginPopupComponent,
+    RemoteOrdersFormComponent
   ],
   imports: [
     CommonModule,
     MenuRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     SharedModule,
     MatIconModule,
     MatTooltipModule,

@@ -27,6 +27,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { EditMenuPopupComponent } from './components/menu/edit-menu-popup/edit-menu-popup.component';
 import { TablesComponent } from './components/dashboard/tables/tables.component';
 import { LocalOrdersComponent } from './components/local-orders/local-orders.component';
+import { RemoteOrdersComponent } from './components/remote-orders/remote-orders.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { LocalOrdersComponent } from './components/local-orders/local-orders.com
     EditMenuPopupComponent,
     TablesComponent,
     LocalOrdersComponent,
+    RemoteOrdersComponent,
   ],
   imports: [
     CommonModule,

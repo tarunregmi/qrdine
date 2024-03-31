@@ -25,6 +25,10 @@ export class TableService {
     this.httpClient_.patch(`${this.url}/${id}`, { isAvailable }).subscribe();
   }
 
+  public bookTable(id: string) {
+    this.httpClient_.patch(`${this.url}/${id}`, { isAvailable: false }).subscribe();
+  }
+
   public subscribeRealtime(): void {
     this.getAllTables();
 
