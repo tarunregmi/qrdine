@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { OrderModel } from 'src/app/shared/models/order.model';
-import { OrderService } from 'src/app/shared/services/order.service';
+import { MyOrder, MyOrderService } from 'src/app/shared/services/my-order.service';
 
 @Component({
   selector: 'qd-order',
@@ -8,15 +7,11 @@ import { OrderService } from 'src/app/shared/services/order.service';
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent {
-  @Input() public order!: OrderModel;
+  @Input() public order!: MyOrder;
 
   constructor(
-    public order_: OrderService
+    public myOrder_: MyOrderService
   ) {}
 
   public readonly displayedColumns = ['title', 'quantity', 'price'];
-
-  public getTotalCost(): number {
-    return this.order.items.reduce((aac, currentItem) => (aac + (currentItem.price * <number>currentItem.quantity)), 0);
-  }
 }

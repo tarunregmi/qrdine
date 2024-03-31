@@ -10,7 +10,7 @@
       <mat-icon fontIcon="explore"></mat-icon> Explore Menu
     </a>
 
-    <a *ngIf="order_.myOrders.length" mat-flat-button color="primary" routerLink="/my-orders">
+    <a *ngIf="showMyOrders" mat-flat-button color="primary" routerLink="/my-orders">
       <mat-icon fontIcon="shopping_basket"></mat-icon> My Orders
     </a>
   </div>

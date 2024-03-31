@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderService } from '../../services/order.service';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'qd-home',
@@ -7,11 +7,20 @@ import { OrderService } from '../../services/order.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  public showMyOrders = false;
+
   constructor(
-    public order_: OrderService,
+    private login_: LoginService,
   ) {}
 
   ngOnInit(): void {
-    this.order_.syncMyOrders();
+    this.login_.updateAccessCredential();
+
+    if (
+      localStorage.getItem('myUnRegisteredOrders') ||
+      this.login_.isLogin() ||
+      this.login_.sameOrigin()
+    ) this.showMyOrders = true;
+    else this.showMyOrders = false;
   }
 }
