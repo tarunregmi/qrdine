@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, WritableSignal } from '@angular/core';
 import { RemoteOrderModel } from '../models/remote.order.model';
 import { environment } from 'src/environments/environment.development';
 import { RealtimeService } from './realtime.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Item } from '../models/order.model';
 import { QueryParams } from '../models/queryparams.model';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { RecordModel } from 'pocketbase';
 import { MenuItem } from '../models/menu.model';
 
@@ -68,6 +68,19 @@ export class RemoteOrdersService {
         this.remote_orders = response.items.map((item: RecordModel) => this.order(item));
       })
     ).subscribe();
+  }
+
+  public makeRemoteOrder(cart: WritableSignal<MenuItem[]>, deliveryAddress: string): Observable<object> {
+    const items: string[] = [];
+    const quantity: Record<string, number> = {};
+    const username = JSON.parse(<string>localStorage.getItem('user')).id;
+    
+    cart().forEach(entry => {
+      items.push(entry.id);
+      quantity[entry.id] = <number>entry.quantity;
+    });
+
+    return this.httpClient_.post(`${this.url}`, { items, quantity, deliveryAddress, username, state: 'pending' });
   }
 
   /**

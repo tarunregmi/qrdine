@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment.development';
 import { OriginPopupComponent } from '../origin-popup/origin-popup.component';
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { fadeIn } from 'src/app/shared/animations/fadeIn';
 import { TableService } from 'src/app/shared/services/table.service';
 
@@ -30,34 +30,37 @@ export class TableComponent implements OnInit, OnDestroy {
     private httpClient_: HttpClient,
     private dialog_: MatDialog,
     private route_: ActivatedRoute,
-    private router_: Router,
   ) {}
 
   ngOnInit(): void {
-    this.bookedTable = <string>this.route_.snapshot.queryParamMap.get('table');
+    this.login_.updateAccessCredential();
+    
+    if (this.login_.sameOrigin()) {
+      this.bookedTable = <string>this.route_.snapshot.queryParamMap.get('table');
 
-    if (this.bookedTable) {
-      // user access by scanning the qr
-      // un-book previous scanned table (if it is)
-      if (this.getBookedTable()) this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.getBookedTable()}`, { isAvailable: true }).subscribe();
-
-      if (this.isCartNotEmpty()) {
-        // book new table
-        localStorage.setItem('bookedTable', this.bookedTable);
-        this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.bookedTable}`, { isAvailable: false }).subscribe();
-      } else {
-        this.bookedTable = '';
-      }
-    } else {
-      // user manually access the website
-      // get previously booked table (if it is)
-      this.bookedTable = this.getBookedTable();
-      
-      // un-book previous booked table (if it is)
       if (this.bookedTable) {
-        this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.bookedTable}`, { isAvailable: true }).subscribe();
-        localStorage.removeItem('bookedTable');
+        // user access by scanning the qr
+        // un-book previous scanned table (if it is)
+        if (this.getBookedTable()) this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.getBookedTable()}`, { isAvailable: true }).subscribe();
+
+        if (this.isCartNotEmpty()) {
+          // book new table
+          localStorage.setItem('bookedTable', this.bookedTable);
+          this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.bookedTable}`, { isAvailable: false }).subscribe();
+        } else {
+          this.bookedTable = '';
+        }
+      } else {
+        // user manually access the website
+        // get previously booked table (if it is)
         this.bookedTable = this.getBookedTable();
+        
+        // un-book previous booked table (if it is)
+        if (this.bookedTable) {
+          this.httpClient_.patch(`${environment.baseURL}/api/collections/${this.collection}/records/${this.bookedTable}`, { isAvailable: true }).subscribe();
+          localStorage.removeItem('bookedTable');
+          this.bookedTable = this.getBookedTable();
+        }
       }
     }
 
@@ -103,9 +106,6 @@ export class TableComponent implements OnInit, OnDestroy {
       if (this.bookedTable) {
         if (this.isCartNotEmpty()) {
           this.localOrder.emit(this.bookedTable);
-          localStorage.removeItem('bookedTable');
-          localStorage.removeItem('cart');
-          this.router_.navigate(['/my-orders']);
         } else {
           this.dialog_.open(PopupComponent, { data: 'Your cart is empty!' });
           this.bookedTable = '';

@@ -10,6 +10,8 @@
   color: #272e3a;
   background-color: #f0f4f9;
   font-family: 'Poppins', sans-serif;
+
+  --min-width: 250px;
 }
 
 html,
@@ -82,6 +84,16 @@ body,
 
 .popup-box {
   padding: 21px;
+}
+
+.file-input {
+  height: 50px;
+  border: 1px dashed rgba(0, 0, 0, 0.3);
+  margin-bottom: 21px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 // override mdc

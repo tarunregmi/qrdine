@@ -1,10 +1,18 @@
 <div class="my-orders-page column" @fadeIn>
-  <div *ngIf="isAccessible; else fallback">
+  <div *ngIf="isAccessible; else fallback" class="orders column">
     <h3>Order History</h3>
-    <span>{{ order_.myOrders.length }} orders</span>
-    <div class="orders column">
-      <qd-order *ngFor="let order of order_.myOrders" [order]="order"></qd-order>
+    
+    <div>
+      <mat-button-toggle-group name="orderType" [(ngModel)]="orderType">
+        <mat-button-toggle value="local">Local Orders</mat-button-toggle>
+        <mat-button-toggle value="remote" [disabled]="!login_.isLogin()">Remote Orders</mat-button-toggle>
+      </mat-button-toggle-group>
     </div>
+
+    <qd-local-orders *ngIf="orderType === 'local'; else remote" @fadeIn></qd-local-orders>
+    <ng-template #remote>
+      <qd-remote-orders @fadeIn></qd-remote-orders>
+    </ng-template>
   </div>
 
   <ng-template #fallback>
