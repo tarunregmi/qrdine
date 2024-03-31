@@ -21,10 +21,16 @@
 
   <mat-form-field appearance="outline" hideRequiredMarker="true">
     <mat-label>Password</mat-label>
-    <input matInput type="password" formControlName="password" />
-    <mat-icon matIconSuffix fontIcon="visibility_off"></mat-icon>
+    <input matInput [type]="password ? 'password' : 'text'" formControlName="password" />
+    <button mat-icon-button matSuffix (click)="password = !password" type="button">
+      <mat-icon>{{ password ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
     <mat-error>{{ getErrorMessage('password') }}</mat-error>
   </mat-form-field>
+
+  <div class="file-input row center">
+    <input type="file" (change)="onImagePicked($event)" formControlName="avatar" required>
+  </div>
 
   <button mat-flat-button color="primary" type="submit">Sign Up</button>
 
