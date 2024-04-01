@@ -3,7 +3,9 @@
   <mat-card-header>
     <div class="title">
       <mat-card-title>{{ item.title }}</mat-card-title>
-      <mat-card-subtitle>{{ item.veg }}</mat-card-subtitle>
+      <mat-card-subtitle>
+        <span class="type" [class.veg]="item.veg">{{ item.veg ? 'veg' : 'non-veg' }}</span>
+      </mat-card-subtitle>
     </div>
     <div class="price">{{ item.price| npr }}</div>
   </mat-card-header>

@@ -21,6 +21,7 @@
     
     .price {
       margin-left: auto;
+      white-space: nowrap;
     }
   }
 
@@ -32,4 +33,18 @@
     grid-template-rows: auto;
     grid-template-columns: auto 1fr;
   }
+}
+
+.type {
+  display: inline-block;
+  min-width: 8ch;
+  padding: 3px 7px;
+  border-radius: 16px;
+  color: white;
+  text-align: center;
+  background: brown;
+}
+
+.veg {
+  background: green;
 }
