@@ -24,12 +24,14 @@
       <span>OR</span>
     </div>
   
-    <button mat-stroked-button type="button">
-      <img src="/assets/google.svg" height="25" alt="Google" />
-      Login with Google
+    <button mat-stroked-button type="button" (click)="OAuth2()">
+      <span class="google-btn row">
+        <img src="/assets/google.svg" height="22" alt="Google" />
+        <span>Login with Google</span>
+      </span>
     </button>
   
-    <p>
+    <p class="fallback">
       Don't have an account?
       <a routerLink="/auth/signup">Sign Up</a>
     </p>

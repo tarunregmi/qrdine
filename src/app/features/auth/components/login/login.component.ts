@@ -45,6 +45,10 @@ export class LoginComponent implements OnInit, OnDestroy  {
     }
   }
 
+  public OAuth2(): void {
+    // 
+  }
+
   ngOnDestroy(): void {
     this.subscriber?.unsubscribe();
   }
