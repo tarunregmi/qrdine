@@ -19,6 +19,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { MenuComponent } from './menu.component';
 import { ItemComponent } from './components/item/item.component';
@@ -28,6 +29,7 @@ import { TableComponent } from './components/table/table.component';
 import { OriginPopupComponent } from './components/origin-popup/origin-popup.component';
 import { LoginPopupComponent } from './components/login-popup/login-popup.component';
 import { RemoteOrdersFormComponent } from './components/remote-orders-form/remote-orders-form.component';
+import { FilterPopupComponent } from './components/filter-popup/filter-popup.component';
 
 
 
@@ -40,7 +42,8 @@ import { RemoteOrdersFormComponent } from './components/remote-orders-form/remot
     TableComponent,
     OriginPopupComponent,
     LoginPopupComponent,
-    RemoteOrdersFormComponent
+    RemoteOrdersFormComponent,
+    FilterPopupComponent
   ],
   imports: [
     CommonModule,
@@ -63,6 +66,7 @@ import { RemoteOrdersFormComponent } from './components/remote-orders-form/remot
     MatInputModule,
     MatFormFieldModule,
     MatPaginatorModule,
+    MatSliderModule,
   ]
 })
 export class MenuModule { }

@@ -5,26 +5,11 @@
       <form class="search-bar column" #searchForm="ngForm" (input)="search()">
         <mat-form-field appearance="outline" hideRequiredMarker="true">
           <input matInput type="text" name="searchedKeyword" [(ngModel)]="searchedKeyword" placeholder="Search From Here" />
-          <button mat-icon-button matSuffix [matMenuTriggerFor]="filter" type="button" class="filter">
+          <button mat-icon-button matSuffix (click)="showFilterOptions()" type="button" class="filter">
             <mat-icon fontIcon="tune"></mat-icon>
           </button>
         </mat-form-field>
       </form>
-  
-      <mat-menu #filter="matMenu">
-        <button mat-menu-item>
-          <mat-icon>dialpad</mat-icon>
-          <span>Redial</span>
-        </button>
-        <button mat-menu-item disabled>
-          <mat-icon>voicemail</mat-icon>
-          <span>Check voice mail</span>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>notifications_off</mat-icon>
-          <span>Disable alerts</span>
-        </button>
-      </mat-menu>
       
     </div>
   </div>
@@ -32,7 +17,6 @@
   <div class="menu-items" style="margin-top: 50px;">
     <qd-item *ngFor="let item of menu_.menuItems()" [item]="item" [cart_]="cart_" @fadeIn></qd-item>
   </div>
-  <!-- <div></div> -->
 
   <div class="sf">
     <mat-paginator

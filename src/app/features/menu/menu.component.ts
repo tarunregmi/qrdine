@@ -11,6 +11,8 @@ import { Subject, Subscription, debounceTime } from 'rxjs';
 import { fadeIn } from 'src/app/shared/animations/fadeIn';
 import { TableService } from 'src/app/shared/services/table.service';
 import { LoginService } from 'src/app/shared/services/login.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FilterPopupComponent } from './components/filter-popup/filter-popup.component';
 
 @Component({
   selector: 'qd-menu',
@@ -33,6 +35,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     private route_: ActivatedRoute,
     private table_: TableService,
     private login_: LoginService,
+    private dialog_: MatDialog,
   ) {}
   
   ngOnInit(): void {
@@ -86,6 +89,19 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   public search(): void {
     this.searchSubject.next(this.searchedKeyword.trim());
+  }
+
+  public showFilterOptions(): void {
+    const dialogRef = this.dialog_.open(FilterPopupComponent);
+    const filterSub = dialogRef.componentInstance.filter.subscribe((filterString) => {
+      this.menu_.getItems(filterString).subscribe(() => {
+        dialogRef.close();
+      });
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      filterSub.unsubscribe();
+    });
   }
 
   ngOnDestroy(): void {
