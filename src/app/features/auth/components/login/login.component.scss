@@ -14,6 +14,10 @@ button[type='submit'] {
 .google-btn {
   gap: 7px;
   align-items: center;
+
+  img {
+    filter: grayscale(1);
+  }
 }
 
 .fallback {
