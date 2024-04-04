@@ -84,7 +84,6 @@ export class MenuComponent implements OnInit, OnDestroy {
   public mpt(event: PageEvent) {
     if (<number>event.previousPageIndex > event.pageIndex) this.location_.back();
     else this.router_.navigate(['./', { page: event.pageIndex + 1 }], { queryParamsHandling: 'preserve' });
-    window.scrollTo({top: 0});
   }
 
   public search(): void {

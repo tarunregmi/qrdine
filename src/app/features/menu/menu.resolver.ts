@@ -12,6 +12,7 @@ export const menuResolver: ResolveFn<Observable<MenuItem[]>> = (route) => {
   return menu_.getItems().pipe(
     catchError(() => EMPTY),
     concatMap(response => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       if (response) return of(response);
       else return EMPTY;
     })
