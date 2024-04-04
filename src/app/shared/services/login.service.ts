@@ -40,7 +40,6 @@ export class LoginService {
     const token = localStorage.getItem(this.tokenKey);
     if (token) {
       if (JSON.parse(atob(token.split('.')[1])).type === 'admin') {
-        console.log('You r admin');
         this.isAdmin.set(true);
         return true;
       }

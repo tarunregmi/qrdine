@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit, OnDestroy  {
     if (this.form.valid) {
       this.subscriber = this.auth_.login(<LoginformModel<string>>this.form.value, this.user).subscribe({
         error: (response: HttpErrorResponse) => {
-          console.log(response.error.message);
           this.snackbar_.open(response.error.message, undefined, { duration: 3500});
         },
         complete: () => this.location_.back()

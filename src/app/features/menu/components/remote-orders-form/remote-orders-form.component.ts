@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit, WritableSignal } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -44,7 +43,6 @@ export class RemoteOrdersFormComponent implements OnInit {
       }
       this.remoteOrder_.makeRemoteOrder(this.cart, Object.values(this.form.value).join(',')).subscribe({
         next: () => this.clearCart(),
-        error: (err: HttpErrorResponse) => console.log(err.message)
       })
     }
   }

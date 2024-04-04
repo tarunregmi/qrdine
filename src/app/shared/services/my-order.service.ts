@@ -48,9 +48,8 @@ export class MyOrderService {
         const namsariRequest = this.myUnRegisteredOrders.map(id => this.httpClient_.patch(`${this.url}/${id}`, { username: this.username}))
         forkJoin(namsariRequest)
         .subscribe({
-          error: () => console.log('namsari error'),
           complete: () => {
-            console.log('All your previouse un-traced order are traced'),
+            // console.log('All your previouse un-traced order are traced'),
             localStorage.removeItem('myUnRegisteredOrders')
             this.myUnRegisteredOrders = undefined;
             this.getAllMyOrders(collection)
@@ -94,9 +93,7 @@ export class MyOrderService {
             // now track the collection realtime
             this.realtime_.record(collection).subscribe('*', (data) => {
               const changedOrderIndex = this.findOrderIndex(data.record.id);
-              console.log(collection, 'changed')
               if (changedOrderIndex >= 0) {
-                console.log(data.record['state']);
                 this.myOrders[changedOrderIndex].state = data.record['state'];
               }
             });

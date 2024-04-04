@@ -50,7 +50,6 @@ export class HighlightsComponent implements OnInit, OnDestroy {
     this.pb.collection(collection).subscribe('*', () => {
       this.count(collection, collection === 'remote_orders' ? this.remoteOrders : this.localOrders);
       this.countCompletedOrders();
-      console.log(collection, 'changed');
     });
   }
 
