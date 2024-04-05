@@ -46,3 +46,6 @@ Thumbs.db
 
 # Environment files
 /src/environments
+
+# QR images
+/qr
