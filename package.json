@@ -9,7 +9,7 @@
     "test": "ng test",
     "pb": "./pb.sh",
     "pb:host": "./pb.sh --host",
-    "ng:host": "ng build && clear && python3 -m http.server 4200 --directory dist/qrdine/",
+    "ng:host": "ng build && clear && ./generate-qr.sh && python3 -m http.server 4200 --directory dist/qrdine/",
     "lint": "ng lint"
   },
   "private": true,
