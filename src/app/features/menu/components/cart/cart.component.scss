@@ -1,11 +1,12 @@
 .cart-page {
   gap: 21px;
   display: grid;
-  grid-template-columns: 350px 1fr;
+  grid-template-columns: var(--min-width-card) 1fr;
   // grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 }
 
 .actions {
+  margin-top: 30px;
   padding: 21px;
   background: #fff;
   border-radius: 10px;
@@ -13,7 +14,7 @@
 
 @media (max-width: 752px) {
   .cart-page {
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(var(--min-width-card), 1fr));
   }
 }
 

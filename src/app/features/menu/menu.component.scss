@@ -1,15 +1,16 @@
 .menu-items {
   gap: 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 330px);
+  grid-template-columns: repeat(auto-fit, var(--min-width-card));
   grid-auto-flow: dense;
   justify-content: center;
+  margin-top: 30px;
 }
 
 .cart-icon {
   position: fixed;
   right: var(--pad-x);
-  bottom: var(--pad-x);
+  bottom: 50px;
   z-index: 10;
 }
 
@@ -18,7 +19,7 @@
   justify-content: center;
   align-items: center;
   // grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  grid-template-columns: minmax(350px, .7fr);
+  grid-template-columns: minmax(var(--min-width-card), .7fr);
 }
 
 .search-filter {
@@ -39,6 +40,7 @@
 }
 
 .menu-page {
+  margin-top: 21px;
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: max-content auto max-content;
