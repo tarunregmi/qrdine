@@ -1,7 +1,7 @@
 <header>
   <mat-toolbar [ngClass]="{'on-scroll': isScrolled}">
     <mat-toolbar-row>
-      <span>App</span>
+      <img src="/assets/logo.svg" height="34" draggable="false" alt="QRdine">
 
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User" *ngIf="login_.isLogin(); else default">
         <mat-icon fontIcon="face"></mat-icon>
