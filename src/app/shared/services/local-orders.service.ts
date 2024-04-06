@@ -7,6 +7,7 @@ import { tap } from 'rxjs';
 import { RecordModel } from 'pocketbase';
 import { MenuItem } from '../models/menu.model';
 import { QueryParams } from '../models/queryparams.model';
+import { TableService } from './table.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class LocalOrdersService {
   constructor(
     private realtime_: RealtimeService,
     private httpClient_: HttpClient,
+    private table_: TableService,
   ) {}
 
   public subscribeRealtime(): void {
@@ -42,7 +44,9 @@ export class LocalOrdersService {
     this.httpClient_.patch(`${this.url}/${order.id}`, { state: order.state }).subscribe({
       next: () => {
         if (order.state === 'completed') {
-          this.httpClient_.post(`${environment.baseURL}/api/collections/revenue/records`, { money: order.total }).subscribe();
+          this.httpClient_.post(`${environment.baseURL}/api/collections/revenue/records`, { money: order.total }).subscribe(() => {
+            this.freeTable(order.table.id)
+          });
         }
       }
     });
@@ -77,7 +81,7 @@ export class LocalOrdersService {
       id: data.id,
       items: this.items((data.expand)?.['items'], data['quantity']),
       total: 0,
-      table: (data.expand)?.['table'].name,
+      table: {id: (data.expand)?.['table'].id, name: (data.expand)?.['table'].name, isAvailable: (data.expand)?.['table'].isAvailable},
       state: data['state'],
       created: data.created,
       user: (data.expand)?.['username'],
@@ -107,5 +111,13 @@ export class LocalOrdersService {
 
   private findOrderIndex(id: string): number {
     return this.local_orders.findIndex(order => order.id === id);
+  }
+
+  /**
+   * free the table if the table is last un-completed tables 
+   */
+  private freeTable(table: string) {
+    const isLast = this.local_orders.filter(order => order.table.id === table).every(order => (order.state === 'completed' || order.state === 'cancelled'));
+    if (isLast) this.table_.updateTable(table, true);
   }
 }
