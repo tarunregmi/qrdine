@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
+import { fadeIn } from '../../animations/fadeIn';
 
 @Component({
   selector: 'qd-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  animations: [ fadeIn ]
 })
 export class HomeComponent implements OnInit {
   public showMyOrders = false;
