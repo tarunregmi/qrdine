@@ -30,6 +30,7 @@ import { OriginPopupComponent } from './components/origin-popup/origin-popup.com
 import { LoginPopupComponent } from './components/login-popup/login-popup.component';
 import { RemoteOrdersFormComponent } from './components/remote-orders-form/remote-orders-form.component';
 import { FilterPopupComponent } from './components/filter-popup/filter-popup.component';
+import { GameComponent } from './components/game/game.component';
 
 
 
@@ -43,7 +44,8 @@ import { FilterPopupComponent } from './components/filter-popup/filter-popup.com
     OriginPopupComponent,
     LoginPopupComponent,
     RemoteOrdersFormComponent,
-    FilterPopupComponent
+    FilterPopupComponent,
+    GameComponent
   ],
   imports: [
     CommonModule,

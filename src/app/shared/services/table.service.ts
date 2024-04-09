@@ -13,6 +13,7 @@ import { tap } from 'rxjs';
 export class TableService {
   public readonly collection: string = 'tables';
   public tables: TableModel[] = [];
+  public showGameBtn = false;
 
   private url = `${environment.baseURL}/api/collections/${this.collection}/records`;
 
@@ -40,7 +41,10 @@ export class TableService {
         }
         case 'update': {
           const updatedItemIndex = this.findTableIndex(data.record.id);
-          if (updatedItemIndex > -1) this.tables[updatedItemIndex] = this.table(data.record);
+          if (updatedItemIndex > -1) {
+            this.tables[updatedItemIndex] = this.table(data.record);
+            this.updateGamePlayCondition();
+          }
           break;
         }
         case 'delete': {
@@ -66,6 +70,7 @@ export class TableService {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       tap((response: any) => {
         this.tables = response.items.map((item: RecordModel) => this.table(item));
+        this.updateGamePlayCondition();
       })
     ).subscribe();
   }
@@ -83,5 +88,10 @@ export class TableService {
 
   private findTableIndex(id: string): number {
     return this.tables.findIndex(table => table.id === id);
+  }
+
+  private updateGamePlayCondition() {
+    this.showGameBtn = this.tables.every(table => table.isAvailable === false);
+    this.showGameBtn = this.showGameBtn && !localStorage.getItem('bookedTable');
   }
 }

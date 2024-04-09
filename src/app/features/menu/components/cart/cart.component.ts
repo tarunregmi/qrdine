@@ -8,6 +8,7 @@ import { LoginPopupComponent } from '../login-popup/login-popup.component';
 import { fadeIn, fadeOut } from 'src/app/shared/animations/fadeIn';
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import { RemoteOrdersFormComponent } from '../remote-orders-form/remote-orders-form.component';
+import { GameService } from 'src/app/shared/services/game.service';
 
 @Component({
   selector: 'qd-cart',
@@ -16,12 +17,15 @@ import { RemoteOrdersFormComponent } from '../remote-orders-form/remote-orders-f
   animations: [fadeIn, fadeOut]
 })
 export class CartComponent implements OnInit {
+  public playGame = false;
+
   constructor(
     public login_: LoginService,
     public menu_: MenuService,
     public cart_: CartService,
     private order_: OrderService,
-    private dialog_: MatDialog
+    private dialog_: MatDialog,
+    private game_: GameService,
   ) {}
 
   ngOnInit(): void {
@@ -48,5 +52,10 @@ export class CartComponent implements OnInit {
     } else {
       this.dialog_.open(LoginPopupComponent);
     }
+  }
+
+  public toggleGame() {
+    this.playGame = !this.playGame;
+    if (!this.playGame) this.game_.cancelGame();
   }
 }
