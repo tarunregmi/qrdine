@@ -4,8 +4,8 @@
       {{ table.name }}
     </mat-button-toggle>
   </mat-button-toggle-group>
-
-  <br>
   
   <button mat-stroked-button type="submit">Order Locally</button>
+  
+  <button mat-stroked-button type="button" (click)="playGame.emit()" *ngIf="table_.showGameBtn">Play Game</button>
 </form>

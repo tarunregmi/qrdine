@@ -17,7 +17,8 @@ import { TableService } from 'src/app/shared/services/table.service';
   animations: [ fadeIn ]
 })
 export class TableComponent implements OnInit, OnDestroy {
-  @Output() localOrder = new EventEmitter<string>();
+  @Output() public playGame = new EventEmitter();
+  @Output() public localOrder = new EventEmitter<string>();
 
   public bookedTable!: string;
   public selectedTable!: string;
