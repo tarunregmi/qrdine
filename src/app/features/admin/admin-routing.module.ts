@@ -6,11 +6,13 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { LocalOrdersComponent } from './components/local-orders/local-orders.component';
 import { RemoteOrdersComponent } from './components/remote-orders/remote-orders.component';
+import { adminGuard } from './admin.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
+    canActivate: [ adminGuard ],
     children: [
       { path: '', component: DashboardComponent, title: 'Admin - Dashboard' },
       { path: 'menu', component: MenuComponent, title: 'Admin - Menu' },
