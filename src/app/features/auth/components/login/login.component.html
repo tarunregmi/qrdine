@@ -1,0 +1,39 @@
+<form [formGroup]="form" (ngSubmit)="onLogin()" class="column">
+  <h1>Hi, Welcome Back! 👋.</h1>
+  <span *ngIf="user" class="user">Please provide admin credential.</span>
+
+  <mat-form-field appearance="outline" hideRequiredMarker="true">
+    <mat-label>{{ !user ? 'Username or '  : ''}}Email</mat-label>
+    <input matInput type="text" formControlName="identity" />
+    <mat-error>This field is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" hideRequiredMarker="true">
+    <mat-label>Password</mat-label>
+    <input matInput [type]="password ? 'password' : 'text'" formControlName="password" />
+    <button mat-icon-button matSuffix (click)="password = !password" type="button">
+      <mat-icon>{{ password ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    <mat-error>This field is required</mat-error>
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" type="submit">Login</button>
+
+  <ng-container *ngIf="!user">
+    <div class="hr row center">
+      <span>OR</span>
+    </div>
+  
+    <button mat-stroked-button type="button" (click)="OAuth2()" disabled>
+      <span class="google-btn row">
+        <img src="/assets/google.svg" height="22" alt="Google" />
+        <span>Login with Google</span>
+      </span>
+    </button>
+  
+    <p class="fallback">
+      Don't have an account?
+      <a routerLink="/auth/signup">Sign Up</a>
+    </p>
+  </ng-container>
+</form>

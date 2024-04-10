@@ -1,0 +1,30 @@
+<header>
+  <mat-toolbar [ngClass]="{'on-scroll': isScrolled}">
+    <mat-toolbar-row>
+      <a routerLink="/" class="row">
+        <img src="/assets/logo.svg" height="34" draggable="false" alt="QRdine">
+      </a>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User" *ngIf="login_.isLogin(); else default">
+        <mat-icon fontIcon="face"></mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/my-orders">
+          <mat-icon fontIcon="shopping_basket"></mat-icon>
+          <span>My Orders</span>
+        </button>
+        <button mat-menu-item (click)="login_.logOut()">
+          <mat-icon fontIcon="logout"></mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+      
+
+      <ng-template #default>
+        <a mat-flat-button color="primary" routerLink="/auth/login">
+          <mat-icon fontIcon="lock_open"></mat-icon>Login
+        </a>
+      </ng-template>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>

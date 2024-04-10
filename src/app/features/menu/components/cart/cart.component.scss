@@ -1,0 +1,43 @@
+.cart-page {
+  gap: 21px;
+  display: grid;
+  grid-template-columns: var(--min-width-card) 1fr;
+  // grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.actions {
+  margin-top: 30px;
+  padding: 21px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.menu-items {
+  grid-template-rows: max-content;
+}
+
+@media (max-width: 752px) {
+  .cart-page {
+    grid-template-columns: repeat(auto-fit, minmax(var(--min-width-card), 1fr));
+  }
+}
+
+.mat-divider {
+  margin: 21px 0;
+}
+
+.game-section {
+  position: relative;
+  margin-top: 30px;
+  overflow: hidden;
+  align-self: center;
+  max-width: max-content;
+}
+
+.game-close-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 5;
+  color: #000;
+}

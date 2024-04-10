@@ -1,0 +1,41 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form column">
+  <span class="page-title">{{ data ? 'Edit' : 'Add' }} Item</span>
+  <mat-form-field appearance="outline" hideRequiredMarker="true">
+    <mat-label>Title</mat-label>
+    <input matInput type="text" formControlName="title" required="true">
+    <mat-error>This field is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <div class="row" style="gap:21px;justify-content:space-between;">
+    <mat-form-field appearance="outline" hideRequiredMarker="true">
+      <mat-label>Price</mat-label>
+      <input matInput type="number" formControlName="price" required="true">
+      <mat-error>This field is required</mat-error>
+    </mat-form-field>
+    
+    <div class="checkbox column">
+      <div class="input row center">
+        <label for="veg">Veg:</label>
+        &nbsp;&nbsp;<input type="checkbox" formControlName="veg" id="veg">
+      </div>
+    </div>
+  </div>
+
+  <div class="file-input row center">
+    <input type="file" (change)="onImagePicked($event)">
+  </div>
+
+  <button mat-flat-button color="primary" type="submit">{{ data ? 'Save Changes' : 'Add Item' }}</button>
+
+  <ng-container *ngIf="data">
+    <div class="hr row center"><span>OR</span></div>
+    <button mat-flat-button color="warn" type="button" (click)="deleteItem.emit()">
+      <mat-icon fontIcon="delete"></mat-icon>Delete Item
+    </button>
+  </ng-container>
+</form>

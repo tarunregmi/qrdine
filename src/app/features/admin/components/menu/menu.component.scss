@@ -1,0 +1,96 @@
+.table-card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table-card {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.table {
+  overflow: auto;
+  max-height: 60vh;
+}
+
+.actions {
+  gap: 21px;
+  justify-content: center;
+}
+
+.mat-mdc-paginator {
+  border-top: 1px solid var(--mat-table-row-item-outline-color);
+}
+
+.gray {
+  background-color: rgb(249 249 249);
+}
+
+.mat-mdc-cell {
+  border: none !important;
+}
+
+.mat-column-action {
+  text-align: end;
+}
+
+.mat-mdc-card-avatar {
+  margin-bottom: 0;
+}
+
+.mat-column-table {
+  text-align: center;
+}
+
+.mat-column-deliveryAddress {
+  word-break: break-all;
+}
+
+.date,
+.mat-column-user {
+  white-space: nowrap;
+
+  .mat-icon {
+    font-size: 1.1rem;
+  }
+}
+
+.sub-table {
+  width: 100%;
+  margin: 10px 0;
+  background: none;
+
+  .mat-mdc-row {
+    height: auto !important;
+  }
+
+  th {
+    font-weight: 500;
+  }
+
+  th, td, tr {
+    border: none;
+  }
+
+  .mat-column-items {
+    width: 100%;
+    padding: 0;
+  }
+
+  .mat-column-sn {
+    width: max-content;
+    padding: 0 1ch 0 0;
+  }
+
+  .mat-column-qnty {
+    text-align: center;
+  }
+
+  .mat-column-price {
+    text-align: end;
+  }
+}
+
+.mat-mdc-form-field {
+  width: 15ch;
+}

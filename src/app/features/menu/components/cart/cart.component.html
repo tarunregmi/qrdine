@@ -1,0 +1,26 @@
+<div class="cart-page" @fadeIn>
+  <mat-card appearance="outlined" class="actions">
+    <h4>Book Table:</h4>
+    <qd-table (localOrder)="makeLocalOrder($event)" (playGame)="toggleGame()"></qd-table>
+    
+    <div class="hr row center"><span>OR</span></div>
+    
+    <div class="column">
+      <button mat-stroked-button (click)="orderHomeDelivery()">Home Delivery</button>
+    </div>
+  </mat-card>
+  
+  <div *ngIf="!playGame; else game" class="menu-items">
+    <qd-cart-item *ngFor="let item of cart_.cart()" [cart_]="cart_" [item]="item" @fadeOut></qd-cart-item>
+  </div>
+
+  <ng-template #game>
+    <div class="game-section" @fadeIn>
+      <button mat-icon-button type="button" (click)="toggleGame()" class="game-close-btn">
+        <mat-icon fontIcon="close"></mat-icon>
+      </button>
+
+      <qd-game></qd-game>
+    </div>
+  </ng-template>
+</div>

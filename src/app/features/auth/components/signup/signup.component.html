@@ -1,0 +1,45 @@
+<form [formGroup]="form" (ngSubmit)="onSignup()" class="column">
+  <h1>Create an Account</h1>
+
+  <mat-form-field appearance="outline" hideRequiredMarker="true">
+    <mat-label>Full Name</mat-label>
+    <input matInput type="text" formControlName="name" />
+    <mat-error>This field is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" hideRequiredMarker="true">
+    <mat-label>Username</mat-label>
+    <input matInput type="text" formControlName="username" />
+    <mat-error>This field is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" hideRequiredMarker="true">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email" />
+    <mat-error>{{ getErrorMessage('email') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" hideRequiredMarker="true">
+    <mat-label>Password</mat-label>
+    <input matInput [type]="password ? 'password' : 'text'" formControlName="password" />
+    <button mat-icon-button matSuffix (click)="password = !password" type="button">
+      <mat-icon>{{ password ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    <mat-error>{{ getErrorMessage('password') }}</mat-error>
+  </mat-form-field>
+
+  <div class="file-input row center">
+    <input type="file" (change)="onImagePicked($event)" formControlName="avatar" required>
+  </div>
+
+  <button mat-flat-button color="primary" type="submit">Sign Up</button>
+
+  <div class="hr row center">
+    <span>Or</span>
+  </div>
+
+  <p>
+    Already have an account?
+    <a routerLink="/auth/login">Login</a>
+  </p>
+</form>

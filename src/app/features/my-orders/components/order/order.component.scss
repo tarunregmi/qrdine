@@ -1,0 +1,75 @@
+.order {
+  background: #fff;
+  overflow: hidden;
+  border-radius: 10px;
+  
+  .status-banner {
+    width: 100%;
+    height: 30px;
+  }
+
+  .container{
+    gap: 21px;
+    padding: 21px;
+  }
+}
+
+.order.pending {
+  .status-banner, .status {
+    background: #fdd835;
+  }
+}
+
+.order.confirmed {
+  .status-banner, .status {
+    color: #fff;
+    background: #508d00;
+  }
+}
+
+.order.cancelled {
+  .status-banner, .status {
+    color: #fff;
+    background: #ff1744;
+  }
+}
+
+.order.completed{
+  .status-banner, .status {
+    color: #fff;
+    background: #00c853;
+  }
+}
+
+.content {
+  gap: 21px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--min-width), 1fr));
+}
+
+.table-card {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.table {
+  overflow: auto;
+  max-height: 35vh;
+}
+
+.actions {
+  gap: 21px;
+  justify-content: center;
+}
+
+.table-footer {
+  border-top: 1px solid var(--mat-table-row-item-outline-color);
+}
+
+.gray {
+  background-color: rgb(249 249 249);
+}
+
+.mat-mdc-cell {
+  border: none !important;
+}

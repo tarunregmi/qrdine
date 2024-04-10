@@ -1,0 +1,21 @@
+<div class="my-orders-page column" @fadeIn>
+  <div *ngIf="isAccessible; else fallback" class="orders column">
+    <h3>Order History</h3>
+    
+    <div>
+      <mat-button-toggle-group name="orderType" [(ngModel)]="orderType">
+        <mat-button-toggle value="local">Local Orders</mat-button-toggle>
+        <mat-button-toggle value="remote" [disabled]="!login_.isLogin()">Remote Orders</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+    <qd-local-orders *ngIf="orderType === 'local'; else remote" @fadeIn></qd-local-orders>
+    <ng-template #remote>
+      <qd-remote-orders @fadeIn></qd-remote-orders>
+    </ng-template>
+  </div>
+
+  <ng-template #fallback>
+    <span style="text-align: center;">Please <a routerLink="/auth/login">log in</a> or connect to the hotel/restaurant <a href="{{ href }}">local network</a> to view this page.</span>
+  </ng-template>
+</div>
