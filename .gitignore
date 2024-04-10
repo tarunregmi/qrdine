@@ -45,7 +45,7 @@ Thumbs.db
 /backend
 
 # Environment files
-/src/environments
+# /src/environments
 
 # QR images
 /qr
