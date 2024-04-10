@@ -51,7 +51,7 @@ export class GraphComponent implements OnInit, OnDestroy {
       
       // group each items by their creation date
       const groupedItems = items.reduce((r, a) => {
-        const key = (new Date(a.created)).toISOString().split('T')[0].split('-')[2];
+        const key = Number((new Date(a.created)).toISOString().split('T')[0].split('-')[2]);
         // console.log(key);      // un-comment this line to debug filtered day (start - end)
         r[key] = r[key] || [];
         r[key].push(a.money);
