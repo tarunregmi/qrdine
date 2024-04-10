@@ -26,6 +26,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.menu_.pageSize.set(10);
+    this.menu_.pageIndex.set(0);
     this.refreshMenu();
   }
   
