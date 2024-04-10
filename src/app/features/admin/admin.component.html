@@ -1,0 +1,12 @@
+<div class="any-page" @fadeIn>
+  <div *ngIf="login_.isAdmin(); else fallback" class="admin-page">
+    <qd-sidebar class="sidebar"></qd-sidebar>
+    <div><router-outlet></router-outlet></div>
+  </div>
+  
+  <ng-template #fallback>
+    <div class="fallback-page column center">
+      <button mat-flat-button routerLink="./login" color="primary">Login as Admin</button>
+    </div>
+  </ng-template>
+</div>

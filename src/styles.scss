@@ -1,13 +1,115 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 :root {
-  font-family: "Poppins", sans-serif;
+  color: #272e3a;
+  background-color: #f0f4f9;
+  font-family: 'Poppins', sans-serif;
+
+  --min-width: 250px;
+  --min-width-card: 320px;
 }
 
-html, body {
+html,
+body,
+#root,
+#main {
   height: 100%;
+}
+
+#root {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: min-content auto;
+
+  --pad-x: 16px; // same as mat-toolbar-row
+}
+
+#main {
+  padding: 0 var(--pad-x); // same as mat-toolbar-row
+  padding-top: var(--mat-toolbar-standard-height); // mat-toolbar height (screen > 599px) for mall 56px
+}
+
+// utility classes
+[class*='-page'] {
+  width: 100%;
+  height: 100%;
+}
+
+.row,
+.column {
+  display: flex;
+}
+
+.row {
+  flex-flow: row nowrap;
+}
+
+.column {
+  flex-flow: column nowrap;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.hr {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  margin: 20px 0;
+  span {
+    padding: 0 15px;
+  }
+}
+
+.hr::before,
+.hr::after {
+  content: '';
+  width: 50%;
+  height: 1px;
+  background: #d3d6db;
+}
+
+.page-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 10px 0;
+  display: inline-block;
+}
+
+.popup-box {
+  padding: 21px;
+}
+
+.file-input {
+  height: 50px;
+  border: 1px dashed rgba(0, 0, 0, 0.3);
+  margin-bottom: 21px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+// override mdc
+.mdc-button {
+  .mat-icon {
+    font-weight: inherit;
+  }
+}
+
+
+// media
+@media (max-width: 599px) {
+  // width is taken from material style
+
+  #main {
+    padding-top: var(--mat-toolbar-mobile-height);
+  }
 }

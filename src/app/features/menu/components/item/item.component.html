@@ -1,0 +1,22 @@
+<mat-card appearance="outlined" class="card column">
+  <img mat-card-image draggable="false" [src]="item.thumbnail" [alt]="item.title" />
+
+  <div class="content">
+    <mat-card-header>
+      <div class="title">
+        <mat-card-title>{{ item.title }}</mat-card-title>
+        <mat-card-subtitle>
+          <span class="type" [class.veg]="item.veg">{{ item.veg ? 'veg' : 'non-veg' }}</span>
+        </mat-card-subtitle>
+      </div>
+      <div class="price">{{ item.price | npr }}</div>
+    </mat-card-header>
+  
+    <mat-card-actions>
+      <button mat-stroked-button color="primary" (click)="addToCart()">
+        <mat-icon fontIcon="shopping_cart"></mat-icon>
+        {{ lable }}
+      </button>
+    </mat-card-actions>
+  </div>
+</mat-card>

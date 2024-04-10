@@ -1,0 +1,45 @@
+<div class="highlights row">
+  <mat-card appearance="outlined" class="card">
+    <div class="column">
+      <span class="lable column">
+        Local Orders
+        <span class="sub-lable">Pending | Confirmed | Completed</span>
+      </span>
+      <span class="point">{{ localOrders.total }}</span>
+    </div>
+    <mat-icon fontIcon="pin_drop"></mat-icon>
+  </mat-card>
+
+  <mat-card appearance="outlined" class="card">
+    <div class="column">
+      <span class="lable column">
+        Remote Orders
+        <span class="sub-lable">Pending | Confirmed | Completed</span>
+      </span>
+      <span class="point">{{ remoteOrders.total }}</span>
+    </div>
+    <mat-icon fontIcon="local_shipping"></mat-icon>
+  </mat-card>
+
+  <mat-card appearance="outlined" class="card">
+    <div class="column">
+      <span class="lable column">
+        Completed Orders
+        <span class="sub-lable">Both Local & Remote</span>
+      </span>
+      <span class="point">{{ completedOrders }}</span>
+    </div>
+    <mat-icon fontIcon="check_circle"></mat-icon>
+  </mat-card>
+
+  <mat-card appearance="outlined" class="card">
+    <div class="column">
+      <span class="lable column">
+        Total Revenue
+        <span class="sub-lable">Today's Only</span>
+      </span>
+      <span class="point">{{ totalRevenue | npr }}</span>
+    </div>
+    <mat-icon fontIcon="paid"></mat-icon>
+  </mat-card>
+</div>

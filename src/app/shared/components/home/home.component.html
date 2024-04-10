@@ -1,0 +1,15 @@
+<div class="home-page column center" @fadeIn>
+  <h1>Welcome To QRdine</h1>
+  <p>
+    Scan, browse our delicious menu, and order directly from your table. It's contactless, convenient, and the perfect way to elevate your dining experience.
+  </p>
+  <div class="row">
+    <a mat-flat-button color="primary" routerLink="/menu">
+      <mat-icon fontIcon="explore"></mat-icon> Explore Menu
+    </a>
+
+    <a *ngIf="showMyOrders" mat-flat-button color="primary" routerLink="/my-orders">
+      <mat-icon fontIcon="shopping_basket"></mat-icon> My Orders
+    </a>
+  </div>
+</div>

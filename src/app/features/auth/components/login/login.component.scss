@@ -1,0 +1,25 @@
+.checkbox {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+button[type='submit'] {
+  margin: 20px 0;
+}
+
+.user {
+  padding: 10px 0;
+}
+
+.google-btn {
+  gap: 7px;
+  align-items: center;
+
+  img {
+    filter: grayscale(1);
+  }
+}
+
+.fallback {
+  margin-top: 20px;
+}

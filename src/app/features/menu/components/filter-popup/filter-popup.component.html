@@ -1,0 +1,47 @@
+<form [formGroup]="form" class="filter-options column" (ngSubmit)="onSubmit()">
+  
+  <div class="header row">
+    <span class="page-title">Filters</span>
+    <mat-icon class="close-btn" fontIcon="close" mat-dialog-close color="primary"></mat-icon>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div class="content column">
+    <div class="price-range column">
+      <span class="sub-title">Price Range</span>
+
+      <mat-slider min="0" max="1500" step="50">
+        <input formControlName="min" matSliderStartThumb>
+        <input formControlName="max" matSliderEndThumb>
+      </mat-slider>
+
+      <div class="row">
+        <mat-form-field floatLabel="always" appearance="outline">
+          <mat-label>Min price</mat-label>
+          <input [value]="form.value.min" matInput type="number" [readonly]="true">
+          <span matTextPrefix>रु&nbsp;</span>
+        </mat-form-field>
+
+        <mat-form-field floatLabel="always" appearance="outline">
+          <mat-label>Max price</mat-label>
+          <input [value]="form.value.max" matInput type="number" [readonly]="true">
+          <span matTextPrefix>रु&nbsp;</span>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="food-type column">
+      <span class="sub-title">Food Type</span>
+      <section class="column">
+        <mat-checkbox formControlName="veg" color="primary">Veg</mat-checkbox>
+        <mat-checkbox formControlName="nonVeg" color="primary">Non-veg</mat-checkbox>
+      </section>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+  <mat-dialog-actions align="end">
+    <button mat-flat-button color="primary" type="submit">Filter</button>
+  </mat-dialog-actions>
+</form>
+

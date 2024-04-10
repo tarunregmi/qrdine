@@ -1,0 +1,44 @@
+.game {
+  position: relative;
+  border: 1px solid;
+  width: max-content;
+  aspect-ratio: 2;
+  overflow: hidden;
+  border-radius: 7px;
+
+  canvas {
+    background: burlywood;
+  }
+}
+
+.info{
+  position: absolute;
+  inset: 0;
+  transition: opacity 1s ease;
+}
+
+.info::before{
+  position: absolute;
+  content: "";
+  inset: 0;
+  z-index: 1;
+  background-color: rgb(0 0 0 / .6);
+}
+
+#controls{
+  text-align: center;
+  padding: 30px;
+  gap: 20px;
+  z-index: 2;
+  flex-flow: column nowrap;
+  border-radius: 7px;
+  background: #fff;
+  box-shadow: 0 0 8px 3px #000;
+}
+
+table, th, td{
+  border: 1px solid #444;
+  border-collapse: collapse;
+  border-radius: 5px;
+  padding: 5px;
+}

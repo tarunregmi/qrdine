@@ -1,0 +1,27 @@
+.cart-action {
+  justify-content: space-between;
+
+  .mdc-button {
+    border-radius: 0 !important;
+    margin: 0 !important;
+    display: inline !important;
+    width: auto !important;
+  }
+
+  .quantity {
+    width: 5ch;
+    display: inline-flex;
+  }
+
+  .mat-mdc-mini-fab {
+    box-shadow: none;
+  }
+
+  .mat-mdc-unelevated-button:disabled {
+    background-color: transparent;
+  }
+}
+
+.type {
+  margin-bottom: 5px;
+}

@@ -1,0 +1,47 @@
+.menu-items {
+  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, var(--min-width-card));
+  grid-auto-flow: dense;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.cart-icon {
+  position: fixed;
+  right: var(--pad-x);
+  bottom: 50px;
+  z-index: 10;
+}
+
+.sf {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  // grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: minmax(var(--min-width-card), .7fr);
+}
+
+.search-filter {
+  // border: 1px solid;
+  align-items: center;
+  display: grid;
+  grid-template-columns: auto max-content;
+
+  input {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.mat-mdc-paginator {
+  margin-top: 50px;
+  background: none;
+}
+
+.menu-page {
+  margin-top: 21px;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: max-content auto max-content;
+}

@@ -1,0 +1,34 @@
+<div class="menu-page" @fadeIn>
+  <div class="sf">
+    <div class="search-filter row">
+
+      <form class="search-bar column" #searchForm="ngForm" (input)="search()">
+        <mat-form-field appearance="outline" hideRequiredMarker="true">
+          <input matInput type="text" name="searchedKeyword" [(ngModel)]="searchedKeyword" placeholder="Search From Here" />
+          <button mat-icon-button matSuffix (click)="showFilterOptions()" type="button" class="filter">
+            <mat-icon fontIcon="tune"></mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+      
+    </div>
+  </div>
+  
+  <div class="menu-items">
+    <qd-item *ngFor="let item of menu_.menuItems()" [item]="item" [cart_]="cart_" @fadeIn></qd-item>
+  </div>
+
+  <div class="sf">
+    <mat-paginator
+      [length]="menu_.totalItems()"
+      [pageSize]="menu_.pageSize()"
+      [pageIndex]="menu_.pageIndex()-1"
+      hidePageSize="true"
+      (page)="mpt($event)">
+    </mat-paginator>
+  </div>
+
+  <button mat-fab color="primary" [matBadge]="cart_.cart().length" matBadgePosition="before" *ngIf="cart_.cart().length" class="cart-icon" routerLink="./cart" queryParamsHandling="preserve">
+    <mat-icon fontIcon="shopping_cart_checkout"></mat-icon>
+  </button>
+</div>
