@@ -40,7 +40,10 @@ export class SignupComponent implements OnInit, OnDestroy {
         next: () => {
           this.subscriber.unsubscribe();
           this.subscriber = this.auth_.login({identity: this.form.value.email, password: this.form.value.password}).subscribe({
-            complete: () => this.location_.back()
+            complete: () => {
+              this.location_.back();
+              this.location_.back();
+            }
           });
         }
       })
