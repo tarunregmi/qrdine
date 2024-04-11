@@ -20,3 +20,5 @@ ng serve --host=0.0.0.0   # run this if 'npm run ng:host' command not work
 ```
 
 **Note**: The `backend` folder that contains the entire backend with the Pocketbase binary has not been made public yet, so you cannot run this project until you have the `backend`.
+
+**Update**: The entire `backend` is public now. Now you can easily run the entire application using above commands.
