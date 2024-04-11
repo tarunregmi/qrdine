@@ -42,7 +42,9 @@ testem.log
 Thumbs.db
 
 # Backend files
-/backend
+# /backend
+/backend/pb_data
+/backend/README.md
 
 # Environment files
 # /src/environments
