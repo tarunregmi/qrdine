@@ -43,7 +43,7 @@ Thumbs.db
 
 # Backend files
 # /backend
-/backend/pb_data
+# /backend/pb_data
 /backend/README.md
 
 # Environment files
