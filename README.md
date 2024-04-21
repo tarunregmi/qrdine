@@ -1,6 +1,10 @@
 # QRdine
 
-Commands to run this application on your machine:
+![Thubnail](https://repository-images.githubusercontent.com/772110619/71a51723-7ac9-4cbf-8d62-4dc90873b0af)
+
+A full-stack web app representing a digital menu and ordering system for hotels/restaurants
+
+## Commands to run this application on your machine:
 ```bash
 # clone the ripo
 git clone git@git.bajratechnologies.com:tarunregmi/qrdine.git
