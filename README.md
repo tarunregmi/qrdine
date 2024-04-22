@@ -4,10 +4,12 @@
 
 A full-stack web app representing a digital menu and ordering system for hotels/restaurants
 
+Demo: [https://youtu.be/Xvbz-NCsAOQ](https://youtu.be/Xvbz-NCsAOQ)
+
 ## Commands to run this application on your machine:
 ```bash
 # clone the ripo
-git clone git@git.bajratechnologies.com:tarunregmi/qrdine.git
+git clone git@github.com:tarunregmi/qrdine.git
 
 # install dependencies
 npm i
